@@ -21,6 +21,7 @@
     "angular": "^1.6.4",
     "angular-animate": "^1.6.4",
     "body-parser": "^1.17.1",
-    "express": "^4.15.2"
+    "express": "^4.15.2",
+    "path": "^0.12.7"
   }
 }
