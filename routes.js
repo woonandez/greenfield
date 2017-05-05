@@ -35,7 +35,13 @@ app.post('/submit_location', (req, res) => {
       console.log(err);
       res.end(err);
     } else {
-      res.end( JSON.stringify( JSON.parse( body ).results ) );
+      var results = JSON.parse( body ).results[0];
+      var returnObj = {
+        location: results.formatted_address,
+        coordinates: results.geometry.location,
+        placeID: results.place_id
+      };
+      res.end( JSON.stringify( returnObj ) );
     }
   });
 });
