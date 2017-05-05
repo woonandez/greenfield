@@ -1,17 +1,15 @@
 angular.module('app')
-  .controller('mapCtrl', function() {})
-  .directive('map', function() {
+  .controller('mapCtrl', function(appServices, $scope, $http) {
+  })
+  .directive('maps', function() {
     return {
       scope: {
         params: '<'
       },
       restrict: 'E',
       controllerAs: 'ctrl',
-      controller: 'mapCtrl',
       bindToController: true,
-      controller: function() {
-        console.log(this);
-      },
+      controller: function() {},
       templateUrl: '../templates/map.html'
     }
   });

@@ -1,1 +1,3 @@
 node_modules
+/public/config/api.js
+/public/node_modules

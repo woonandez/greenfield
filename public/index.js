@@ -1,7 +1,5 @@
 angular.module('app')
-  .controller('appCtrl', function($scope) {
-    $scope.params = 'hello';
-    console.log($scope, 'SCOPE')
+  .controller('appCtrl', function($scope, appServices) {
   })
   .directive('appDir', function() {
     return {

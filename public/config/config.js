@@ -1,7 +1,9 @@
-angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router'])
+
+angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
   .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
-      'self'
+      'self',
+      'https://maps.googleapis.com/maps/**'
     ]);
 
     $stateProvider
