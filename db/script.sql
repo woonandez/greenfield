@@ -1,0 +1,31 @@
+DROP DATABASE IF EXISTS `piranha`;
+
+CREATE DATABASE piranha;
+
+USE piranha;
+
+DROP TABLE IF EXISTS `itineraries`;
+
+CREATE TABLE `itineraries` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(50) NOT NULL,
+  `start` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `end` DATETIME NOT NULL,
+  `userId` INTEGER NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+DROP TABLE IF EXISTS `locations`;
+
+CREATE TABLE `locations` (
+  `id` INTEGER NOT NULL AUTO_INCREMENT,
+  `location` VARCHAR(200) NOT NULL ,
+  `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `longitude` DOUBLE NOT NULL,
+  `latitude` DOUBLE NOT NULL,
+  `itineraryId` INTEGER NOT NULL,
+  PRIMARY KEY (`id`)
+);
+
+ALTER TABLE `locations` ADD FOREIGN KEY (itineraryId) REFERENCES `itineraries` (`id`);
+
