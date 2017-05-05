@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
-app.post('/submitLocation', (req, res) => {
+app.post('/submit_location', (req, res) => {
   res.end('location placeholder');
 });
 
