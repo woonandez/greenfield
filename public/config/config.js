@@ -1,6 +1,7 @@
-angular.module('app', [])
+angular.module('app', ['ngMap'])
 .config(function($sceDelegateProvider) {
   $sceDelegateProvider.resourceUrlWhitelist([
-    'self'
+    'self',
+    'https://maps.googleapis.com/maps/**'
   ]);
 });
