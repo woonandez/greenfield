@@ -4,15 +4,21 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hello World</title>
+    <script src="./lib/angular/angular.js"></script>
 
   </head>
   <body>
-  <h1>Team PIRANHA!!!!</h1>
     <div ng-app="app">
+      <h1>Team PIRANHA!!!!</h1>
       <div ng-controller="appCtrl">
-        <map></map>
+        <map params="params"></map>
+        <app-dir></app-dir>
       </div>
     </div>
 
+  <script src="/config/config.js"></script>
+  <script src="index.js"></script>
+  <script src="/components/map.js"></script>
   </body>
+
 </html>
