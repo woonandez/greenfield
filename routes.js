@@ -19,15 +19,24 @@ app.get('/', (req, res) => {
 
 // form should send request with text from an input element named 'text'
 app.post('/submit_location', (req, res) => {
-  var propertiesObj = { address: req.body.text,
-    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8' };
 
-  var params = {url: 'https://maps.googleapis.com/maps/api/geocode/json', qs: propertiesObj};
+  var propertiesObj = {
+    address: req.body.text,
+    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
+  };
+
+  var params = {
+    url: 'https://maps.googleapis.com/maps/api/geocode/json',
+    qs: propertiesObj
+  };
 
   request(params, function(err, response, body) {
-    if(err) { console.log(err); return; }
-    body = JSON.parse(body);
-    res.end( JSON.stringify(body.results) );
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      res.end( JSON.stringify( JSON.parse( body ).results ) );
+    }
   });
 });
 
