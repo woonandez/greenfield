@@ -1,6 +1,30 @@
-angular.module('app', [])
-.config(function($sceDelegateProvider) {
-  $sceDelegateProvider.resourceUrlWhitelist([
-    'self'
-  ]);
-});
+angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router'])
+  .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider) {
+    $sceDelegateProvider.resourceUrlWhitelist([
+      'self'
+    ]);
+
+    $stateProvider
+      .state('home', {
+        url: '/',
+        controller: 'appCtrl',
+        templateUrl: '../index.html',
+        controllerAs: 'vm'
+      })
+      .state('login', {
+        url: '/login',
+        controller: 'loginCtrl',
+        templateUrl: '../templates/login.html',
+        controllerAs: 'vm'
+      })
+
+    lockProvider.init({
+      clientID: 'x7Iti71JJV6appY7ppOL6Xaji1hH4FmB',
+      domain: 'xosk.auth0.com',
+      options: {
+        _idTokenVerification: false
+      }
+    });
+
+    $urlRouterProvider.otherwise('/');
+  });

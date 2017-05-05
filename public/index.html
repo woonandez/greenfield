@@ -2,23 +2,36 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Hello World</title>
     <script src="./lib/angular/angular.js"></script>
-
+    <script src="http://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
+    <script src="node_modules/auth0-js/build/auth0.js"></script>
+    <script src="node_modules/angular-lock/dist/angular-lock.js"></script>
+    <script src="node_modules/angular-jwt/dist/angular-jwt.js"></script>
   </head>
+
   <body>
     <div ng-app="app">
       <h1>Team PIRANHA!!!!</h1>
+
+      <div ng-if="isAuthenticated">
+        <p>Thank you for logging in!</p>
+        <button ng-click="vm.authService.logout()">Log Out</button>
+      </div>
+
       <div ng-controller="appCtrl">
         <map params="params"></map>
         <app-dir></app-dir>
       </div>
     </div>
 
-  <script src="/config/config.js"></script>
-  <script src="index.js"></script>
-  <script src="/components/map.js"></script>
+    <script src="./public/config/config.js"></script>
+    <script src="./public/services/auth.service.js"></script>
+    <script src="./public/index.run.js"></script>
+    <script src="./public/index.js"></script>
+    <script src="./public/components/map.js"></script>
   </body>
 
 </html>

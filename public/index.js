@@ -11,3 +11,10 @@ angular.module('app')
       `
     }
   })
+
+  // Auth0 Controller
+  .controller('loginCtrl', function() {
+    var vm = this;
+
+    vm.authService = authService;
+  });
