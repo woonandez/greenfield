@@ -7,6 +7,7 @@
     <script src="./lib/angular/angular.js"></script>
     <script src="http://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
+    <script src="./node_modules/angular-storage/dist/angular-storage.js"></script>
     <script src="./node_modules/auth0-js/build/auth0.js"></script>
     <script src="./node_modules/angular-lock/dist/angular-lock.js"></script>
     <script src="./node_modules/angular-jwt/dist/angular-jwt.js"></script>
@@ -20,7 +21,7 @@
 
       <div ng-if="isAuthenticated">
         <p>Thank you for logging in!</p>
-        <button ng-click="vm.authService.logout()">Log Out</button>
+        <button ng-click="authService.logout()">Log Out</button>
       </div>
 
       <div ng-controller="appCtrl">
@@ -29,12 +30,12 @@
       </div>
     </div>
 
-    <script src="./config/config.js"></script>
+    <script src="config/config.js"></script>
     <script src="services/auth.service.js"></script>
     <script src="index.run.js"></script>
     <script src="index.js"></script>
-    <script src="./components/map.js"></script>
-    <script src="./services/services.js"></script>
+    <script src="components/map.js"></script>
+    <script src="services/services.js"></script>
     <script src="http://maps.google.com/maps/api/js"></script>
   </body>
 

@@ -1,6 +1,5 @@
-
-angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
-  .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider) {
+angular.module('app', ['auth0.lock', 'angular-jwt', 'angular-storage', 'ui.router', 'ngMap'])
+  .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider, $httpProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self',
       'https://maps.googleapis.com/maps/**'
@@ -28,5 +27,5 @@ angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
       }
     });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/login');
   });

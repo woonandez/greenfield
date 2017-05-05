@@ -5,14 +5,18 @@ angular.module('app')
     return {
       template:
       `
-        <h2>hello</h2>
+        <div ng-controller="loginCtrl">
+          <button class="btn btn-primary" ng-click="authService.login()">Log In</button>
+          <h2>hello</h2>
+        </div>
       `
     }
   })
 
   // Auth0 Controller
-  .controller('loginCtrl', function() {
+  .controller('loginCtrl', function($scope, authService) {
     var vm = this;
 
     vm.authService = authService;
+    $scope.activate = () => { console.log(this) }
   });
