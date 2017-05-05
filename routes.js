@@ -14,6 +14,10 @@ app.get('/', (req, res) => {
   res.sendFile('index.html');
 });
 
+
+
+
+// form should send request with text from an input element named 'text'
 app.post('/submit_location', (req, res) => {
   var propertiesObj = { address: req.body.text,
     key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8' };
