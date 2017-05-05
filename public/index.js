@@ -1,5 +1,9 @@
 angular.module('app')
-  .controller('appCtrl', function($scope, appServices, NgMap) {
+  .controller('appCtrl', function($scope, $location, appServices, NgMap, authService) {
+    if ($location.url() === '/') {
+      authService.login();
+    }
+
     $scope.mapCenter = 'San Francisco';
 
     NgMap.getMap().then(function(map) {
@@ -29,7 +33,11 @@ angular.module('app')
     return {
       template:
       `
-        <h2>hello</h2>
       `
     }
   })
+
+  // Auth0 Controller
+  .controller('loginCtrl', function(authService) {
+    var vm = this;
+  });
