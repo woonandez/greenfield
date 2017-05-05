@@ -1,6 +1,9 @@
 angular.module('app')
-  .controller('appCtrl', function($scope, appServices, NgMap, authService) {
-    authService.login();
+  .controller('appCtrl', function($scope, $location, appServices, NgMap, authService) {
+    if ($location.url() === '/') {
+      authService.login();
+    }
+
     $scope.mapCenter = 'San Francisco';
 
     NgMap.getMap().then(function(map) {

@@ -27,5 +27,5 @@ angular.module('app', ['auth0.lock', 'angular-jwt', 'angular-storage', 'ui.route
       }
     });
 
-    $urlRouterProvider.otherwise('/login');
+    $urlRouterProvider.otherwise('/');
   });
