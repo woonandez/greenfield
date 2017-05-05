@@ -7,10 +7,8 @@ angular.module('app')
         headers: { 'Content-Type': 'application/json'},
         data: {
           cityLoc: object.cityLoc,
-          markers: object.markers,
           time: object.time,
-          date: object.date,
-          uid: object.uid
+          date: object.date
         }
       }).then((res) => {
         callback(res);
