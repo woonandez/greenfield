@@ -1,29 +1,31 @@
-DROP DATABASE IF EXISTS `piranha`;
+-- DROP DATABASE IF EXISTS `piranha`;
 
-CREATE DATABASE piranha;
+CREATE DATABASE IF NOT EXISTS `piranha`;
 
 USE piranha;
 
-DROP TABLE IF EXISTS `itineraries`;
+-- DROP TABLE IF EXISTS `itineraries`;
 
-CREATE TABLE `itineraries` (
+CREATE TABLE IF NOT EXISTS `itineraries` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `name` VARCHAR(50) NOT NULL,
-  `start` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `end` DATETIME NOT NULL,
+  `name` TEXT NOT NULL,
+  `start` TEXT NOT NULL,
+  `end` TEXT NOT NULL,
   `userId` INTEGER NOT NULL,
   PRIMARY KEY (`id`)
 );
 
-DROP TABLE IF EXISTS `locations`;
+-- DROP TABLE IF EXISTS `locations`;
 
-CREATE TABLE `locations` (
+CREATE TABLE  IF NOT EXISTS `locations` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
-  `location` VARCHAR(200) NOT NULL ,
-  `date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `longitude` DOUBLE NOT NULL,
-  `latitude` DOUBLE NOT NULL,
   `itineraryId` INTEGER NOT NULL,
+  `location` TEXT NOT NULL ,
+  `date` TEXT NOT NULL,
+  `time` TEXT NOT NULL,
+  `longitude` INTEGER NOT NULL,
+  `latitude` INTEGER NOT NULL,
+
   PRIMARY KEY (`id`)
 );
 
