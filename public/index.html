@@ -12,17 +12,17 @@
       <h1>Team PIRANHA!!!!</h1>
       <div ng-controller="appCtrl">
         <search search-location="searchLocation"></search>
-        <map center="san francisco"></map>
+        <ng-map center="{{mapCenter}}" zoom="13">
+          <marker animation="DROP" position="{{mapCenter}}"></marker>
+        </ng-map>
         <app-dir></app-dir>
       </div>
     </div>
-  <script>
-  </script>
-  <script src="./config/config.js"></script>
+  <script src="/config/config.js"></script>
   <script src="index.js"></script>
-  <script src="./components/search.js"></script>
-  <script src="./services/services.js"></script>
-  <script src="http://maps.google.com/maps/api/js"></script>
+  <script src="/components/search.js"></script>
+  <script src="/services/services.js"></script>
+  <script src="http://maps.google.com/maps/api/js?key=AIzaSyBGhJ__priHXRxOo6rS1mBl5ub6YTou628"></script>
   </body>
 
 </html>

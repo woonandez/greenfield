@@ -7,9 +7,7 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'ctrl',
       bindToController: true,
-      controller: function() {
-        console.log(this);
-      },
+      controller: function() {},
       templateUrl: '../templates/search.html'
     }
   })
