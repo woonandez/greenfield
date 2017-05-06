@@ -1,0 +1,17 @@
+{
+  "name": "public",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "angular-jwt": "^0.1.9",
+    "angular-lock": "^2.0.2",
+    "@uirouter/angularjs": "^1.0.0",
+    "auth0-js": "^8.6.0"
+  }
+}
