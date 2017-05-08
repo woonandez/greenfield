@@ -8,13 +8,12 @@ angular.module('app')
       console.log(localStorage.getItem('id_token'));
     }
 
-    // Query database for locations
-      // Create markers with longitude and latitude
-    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
-
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
     $scope.markers = [];
+    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
+    // Query database for locations
+      // Create markers with longitude and latitude
 
     $scope.getCurrentLocation = function(e) {
       var lat = e.latLng.lat();
@@ -38,17 +37,11 @@ angular.module('app')
       $scope.mapCenter = newLoc;
     }
 
-    $scope.searchPlaces = function(input) {}
-
-  })
-  .directive('appDir', function() {
-    return {
-      template:
-      `
-      `
+    $scope.getMarkerLocations = function() {
+      console.log(authService)
     }
-  })
 
+  })
   // Auth0 Controller
   .controller('loginCtrl', function(authService) {
     var vm = this;
