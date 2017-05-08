@@ -3,31 +3,32 @@ angular.module('app')
     if ($location.url() === '/') {
       authService.login();
     }
+    $scope.markers = [];
+    $scope.mapCenter = 'San Francisco';
+    $scope.mapType = 'TERRAIN';
+    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}];
 
     $scope.activate = () => {
       console.log(localStorage.getItem('id_token'));
     }
 
-    $scope.markers = [];
-    $scope.mapCenter = 'San Francisco';
-    $scope.mapType = 'TERRAIN';
-    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
+    // Placeholder
     // Query database for locations
       // Create markers with longitude and latitude
 
-    $scope.getCurrentLocation = function(e) {
+    $scope.getCurrentLocation = (e) => {
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
       $scope.mapCenter = [lat, long];
       console.log($scope.mapCenter, 'mapCenter')
     }
 
-    $scope.goAnchor = function (event) {
+    $scope.goAnchor = (event) => {
       console.log(this.id);
       gotoAnchor(this.id);
     }
 
-    NgMap.getMap().then(function(map) {
+    NgMap.getMap().then((map) => {
       map.getCenter();
       $scope.getMarkerLocations();
       console.log(map);
@@ -35,19 +36,23 @@ angular.module('app')
         // the markers that correspond to the items in the itinerary
     });
 
-    $scope.searchLocation = function(newLoc) {
+    $scope.searchLocation = (newLoc) => {
       $scope.mapCenter = newLoc;
     }
 
-    $scope.getMarkerLocations = function() {
-      appServices.getMarkers('param', function({data}) {
+    $scope.getMarkerLocations = () => {
+      appServices.getMarkers('param', ({data}) => {
         data.forEach(d => $scope.markers.push(d));
         console.log($scope.markers, 'markers');
       });
     }
 
+    $scope.addMarker = () => {
+
+    }
+
   })
   // Auth0 Controller
-  .controller('loginCtrl', function(authService) {
+  .controller('loginCtrl', (authService) => {
     var vm = this;
   });

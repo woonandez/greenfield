@@ -2,7 +2,8 @@ angular.module('app')
   .directive('currentItineraryList', function() {
     return {
       scope: {
-        locations: '<'
+        locations: '<',
+        addMarker: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryList',

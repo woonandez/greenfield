@@ -1,6 +1,12 @@
 <div class=currentItineraryList>
+  <form ng-submit="currentItineraryList.addMarker()">
+    <input ng-model="place">Your Destination</input>
+    <input ng-model="date">When will you be there?</input>
+    <textarea ng-model="desc">Give us a brief description of what you will be doing that day.</textarea>
+  </form>
   <current-itinerary-entry
     ng-repeat="place in currentItineraryList.locations track by $index"
     place="currentItineraryList.locations[$index]"
-  >
+    add-marker="currentItineraryList.addMarker"
+  ></current-itinerary-entry>
 </div>

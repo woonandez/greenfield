@@ -2,12 +2,13 @@ angular.module('app')
   .directive('currentItineraryEntry', function() {
     return {
       scope: {
-        place: '='
+        place: '=',
+        addMarker: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
-      controller: () => {},
+      controller: function() {},
       templateUrl: '../templates/currentItineraryEntry.html'
     }
   });
