@@ -12,10 +12,13 @@
       <h1>Team PIRANHA!!!!</h1>
       <div ng-controller="appCtrl">
         <search search-location="searchLocation"></search>
-        <ng-map center="{{mapCenter}}" zoom="13" map-type-id="MapTypeId.{{mapType}}">
-          <marker animation="DROP" position="{{mapCenter}}" ></marker>
-        </ng-map>
-        <app-dir></app-dir>
+          <div class="mapContainer">
+            <button ng-click="changeMapType()">Change Map Type</button>
+            <ng-map center="{{mapCenter}}" zoom="13" map-type-id="MapTypeId.{{mapType}}">
+              <marker animation="DROP" position="{{mapCenter}}" ></marker>
+            </ng-map>
+          <app-dir></app-dir>
+        </div>
       </div>
     </div>
   <script src="/config/config.js"></script>

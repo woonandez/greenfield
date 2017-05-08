@@ -2,9 +2,11 @@ angular.module('app')
   .controller('appCtrl', function($scope, appServices, NgMap) {
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
-    // appServices.getMarkers('data', function(res) {
-    //   console.log(res);
-    // })
+
+    $scope.changeMapType = function() {
+      $scope.mapType === 'TERRAIN' ? $scope.mapType = 'SATELLITE' : $scope.mapType = 'TERRAIN';
+    }
+
     $scope.goAnchor = function (event) {
       console.log(this.id);
       gotoAnchor(this.id);
