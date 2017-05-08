@@ -13,29 +13,33 @@ angular.module('app')
     $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
 
     $scope.mapCenter = 'San Francisco';
+    $scope.mapType = 'TERRAIN';
+    $scope.markers = [];
+
+    $scope.getCurrentLocation = function(e) {
+      var lat = e.latLng.lat();
+      var long = e.latLng.lng();
+      $scope.mapCenter = [lat, long];
+    }
+
+    $scope.goAnchor = function (event) {
+      console.log(this.id);
+      gotoAnchor(this.id);
+    }
 
     NgMap.getMap().then(function(map) {
-
       map.getCenter();
       console.log(map);
-      console.log('markers', map.markers);
-      var user = {
-        cityLoc: $scope.mapCenter,
-        markers: map.markers,
-        time: '',
-        date: '',
-        uid: ''
-      }
-      appServices.sendCoords(user, function(res) {
-        console.log(res);
-      })
-
+      // this function will be used to initialize all of the different markers on the map
+        // the markers that correspond to the items in the itinerary
     });
+
     $scope.searchLocation = function(newLoc) {
       $scope.mapCenter = newLoc;
     }
-    $scope.searchPlaces = function(input) {
-    }
+
+    $scope.searchPlaces = function(input) {}
+
   })
   .directive('appDir', function() {
     return {

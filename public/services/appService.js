@@ -7,13 +7,21 @@ angular.module('app')
         headers: { 'Content-Type': 'application/json'},
         data: {
           cityLoc: object.cityLoc,
-          markers: object.markers,
           time: object.time,
-          date: object.date,
-          uid: object.uid
+          date: object.date
         }
       }).then((res) => {
         callback(res);
+      })
+    }
+
+    this.getMarkers = function(param, callback) {
+      $http({
+        method: 'GET',
+        url: '/locations_for_itinerary',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then((data) => {
+        callback(data);
       })
     }
   });

@@ -25,13 +25,28 @@
       </div>
 
       <div ng-controller="appCtrl">
+
         <search search-location="searchLocation"></search>
-        <button ng-click="activate()"></button>
-        <ng-map center="{{mapCenter}}" zoom="13" ng-if="isAuthenticated">
-          <marker animation="DROP" position="{{mapCenter}}"></marker>
-        </ng-map>
-        <current-itinerary-list locations="locations"></current-itinerary-list>
-        <app-dir></app-dir>
+
+          <br></br>
+
+          <div class="mapContainer">
+            <ng-map
+              ng-if="isAuthenticated"
+              center="{{mapCenter}}"
+              zoom="13"
+              map-type-id="MapTypeId.{{mapType}}">
+              <marker
+                draggable="true"
+                on-dragend="getCurrentLocation()"
+                animation="DROP"
+                position="{{mapCenter}}" />
+            </ng-map>
+          <br></br>
+          <current-itinerary-list locations="locations"></current-itinerary-list>
+          <app-dir></app-dir>
+        </div>
+
       </div>
     </div>
 
