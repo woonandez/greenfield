@@ -48,7 +48,7 @@ angular.module('app')
     }
 
     $scope.addMarker = () => {
-
+      console.log('ran');
     }
 
   })
