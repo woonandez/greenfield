@@ -14,7 +14,7 @@ var itineraries = sequelize.define('itineraries', {
 
 var locations = sequelize.define('locations', {
   location: Sequelize.STRING,
-  vistDate: Sequelize.TEXT,
+  visitDate: Sequelize.TEXT,
   time: Sequelize.TEXT,
   longitude: Sequelize.DOUBLE,
   latitude: Sequelize.DOUBLE
