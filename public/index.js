@@ -8,9 +8,9 @@ angular.module('app')
       console.log(localStorage.getItem('id_token'));
     }
 
+    $scope.markers = [];
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
-    $scope.markers = [];
     $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
     // Query database for locations
       // Create markers with longitude and latitude
@@ -19,6 +19,7 @@ angular.module('app')
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
       $scope.mapCenter = [lat, long];
+      console.log($scope.mapCenter, 'mapCenter')
     }
 
     $scope.goAnchor = function (event) {
@@ -28,6 +29,7 @@ angular.module('app')
 
     NgMap.getMap().then(function(map) {
       map.getCenter();
+      $scope.getMarkerLocations();
       console.log(map);
       // this function will be used to initialize all of the different markers on the map
         // the markers that correspond to the items in the itinerary
@@ -38,7 +40,10 @@ angular.module('app')
     }
 
     $scope.getMarkerLocations = function() {
-      console.log(authService)
+      appServices.getMarkers('param', function({data}) {
+        data.forEach(d => $scope.markers.push(d));
+        console.log($scope.markers, 'markers');
+      });
     }
 
   })
