@@ -12,7 +12,7 @@
       <h1>Team PIRANHA!!!!</h1>
       <div ng-controller="appCtrl">
         <search search-location="searchLocation"></search>
-        <ng-map center="{{mapCenter}}" zoom="13">
+        <ng-map center="{{mapCenter}}" zoom="13" map-type-id="MapTypeId.{{mapType}}">
           <marker animation="DROP" position="{{mapCenter}}" ></marker>
         </ng-map>
         <app-dir></app-dir>
