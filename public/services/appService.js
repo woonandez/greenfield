@@ -14,4 +14,14 @@ angular.module('app')
         callback(res);
       })
     }
+
+    this.getMarkers = function(param, callback) {
+      $http({
+        method: 'GET',
+        url: '/locations_for_itinerary',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then((data) => {
+        callback(data);
+      })
+    }
   });
