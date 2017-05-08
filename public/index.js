@@ -2,6 +2,7 @@ angular.module('app')
   .controller('appCtrl', function($scope, appServices, NgMap) {
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
+    $scope.markers = [];
 
     $scope.getCurrentLocation = function(e) {
       var lat = e.latLng.lat();
