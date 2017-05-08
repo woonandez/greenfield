@@ -4,6 +4,14 @@ angular.module('app')
       authService.login();
     }
 
+    $scope.activate = () => {
+      console.log(localStorage.getItem('id_token'));
+    }
+
+    // Query database for locations
+      // Create markers with longitude and latitude
+    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}]; // Placeholder
+
     $scope.mapCenter = 'San Francisco';
 
     NgMap.getMap().then(function(map) {

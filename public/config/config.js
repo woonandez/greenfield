@@ -1,4 +1,4 @@
-angular.module('app', ['auth0.lock', 'angular-jwt', 'angular-storage', 'ui.router', 'ngMap'])
+angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
   .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider, $httpProvider) {
     $sceDelegateProvider.resourceUrlWhitelist([
       'self',

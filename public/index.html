@@ -7,7 +7,6 @@
     <script src="./lib/angular/angular.js"></script>
     <script src="http://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
-    <script src="./node_modules/angular-storage/dist/angular-storage.js"></script>
     <script src="./node_modules/auth0-js/build/auth0.js"></script>
     <script src="./node_modules/angular-lock/dist/angular-lock.js"></script>
     <script src="./node_modules/angular-jwt/dist/angular-jwt.js"></script>
@@ -21,15 +20,17 @@
       <h1>Team PIRANHA!!!!</h1>
 
       <div ng-if="isAuthenticated">
+        <button class="btn btn-primary" ng-click="authService.logout()">Log Out</button>
         <p>Thank you for logging in!</p>
-        <button ng-click="authService.logout()">Log Out</button>
       </div>
 
       <div ng-controller="appCtrl">
         <search search-location="searchLocation"></search>
-        <ng-map center="{{mapCenter}}" zoom="13">
+        <button ng-click="activate()"></button>
+        <ng-map center="{{mapCenter}}" zoom="13" ng-if="isAuthenticated">
           <marker animation="DROP" position="{{mapCenter}}"></marker>
         </ng-map>
+        <current-itinerary-list locations="locations"></current-itinerary-list>
         <app-dir></app-dir>
       </div>
     </div>
@@ -40,6 +41,8 @@
     <script src="index.run.js"></script>
     <script src="index.js"></script>
     <script src="components/search.js"></script>
+    <script src="components/currentItineraryEntry.js"></script>
+    <script src="components/currentItineraryList.js"></script>
     <script src="http://maps.google.com/maps/api/js?key=AIzaSyBGhJ__priHXRxOo6rS1mBl5ub6YTou628"></script>
   </body>
 
