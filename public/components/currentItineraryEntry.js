@@ -2,8 +2,7 @@ angular.module('app')
   .directive('currentItineraryEntry', function() {
     return {
       scope: {
-        place: '=',
-        addMarker: '<'
+        place: '='
       },
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
