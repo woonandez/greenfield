@@ -10,6 +10,7 @@ angular.module('app')
     $scope.getCurrentLocation = function(e) {
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
+      $scope.mapCenter = [lat, long];
       console.log('lat', lat, 'long', long);
     }
 
