@@ -6,15 +6,16 @@ var sequelize = new Sequelize('piranha', 'root', '', {
   });
 
 var itineraries = sequelize.define('itineraries', {
-  name: Sequelize.STRING,
-  start: Sequelize.DATE,
-  end: Sequelize.DATE,
+  name: Sequelize.TEXT,
+  start: Sequelize.TEXT,
+  end: Sequelize.TEXT,
   userId: Sequelize.INTEGER
 })
 
 var locations = sequelize.define('locations', {
   location: Sequelize.STRING,
-  vistDate: Sequelize.DATE,
+  vistDate: Sequelize.TEXT,
+  time: Sequelize.TEXT,
   longitude: Sequelize.DOUBLE,
   latitude: Sequelize.DOUBLE
 });

@@ -22,7 +22,8 @@ CREATE TABLE IF NOT EXISTS `itineraries` (
 CREATE TABLE  IF NOT EXISTS `locations` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `location` VARCHAR(200) NOT NULL ,
-  `visitDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `visitDate` TEXT NOT NULL,
+  `time` TEXT NOT NULL,
   `longitude` DOUBLE NOT NULL,
   `latitude` DOUBLE NOT NULL,
   `id_itineraries` INTEGER NOT NULL,
