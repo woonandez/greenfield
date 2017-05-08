@@ -4,6 +4,25 @@ var express = require('express'),
     request = require('request');
 
 
+var exec = require('child_process').exec;
+
+exec('mysql -u root < db/script.sql');
+
+
+
+// var mysql = require('mysql');
+
+// var connection = mysql.createConnection({
+//   host     : 'localhost',
+//   user     : 'root',
+//   password : '',
+//   database : 'piranha'
+// });
+
+
+
+
+
 // var viewPath = path.join(__dirname+'/public/views/');
 var app = express();
 
@@ -41,9 +60,50 @@ app.post('/submit_location', (req, res) => {
         coordinates: results.geometry.location,
         placeID: results.place_id
       };
-      res.end( JSON.stringify( returnObj ) );
+
+
+      res.end( JSON.stringify(returnObj) );
     }
   });
+});
+
+
+app.get('/locations_for_itinerary', (req, res) => {
+  console.log(req.query.itineraryId);
+  res.end( JSON.stringify( [ {
+    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
+    // visitDate: "July 4th",
+    id: 1,
+    latitude: 38.277942,
+    longitude: -122.643732
+  },
+  {
+    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
+    // visitDate: "July 4th",
+    id: 2,
+    latitude: 30.277942,
+    longitude: -122.643732
+  },
+  {
+    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
+    // visitDate: "July 4th",
+    id: 3,
+    latitude: 35.277942,
+    longitude: -122.643732
+  } ]));
+  // connection.query(`SELECT * FROM locations WHERE user = ${req.body.itineraryId}`, function(error, results, fields) {
+  //   if (error) { throw error; }
+  //   console.log(results);
+  // });
+});
+
+app.post('/login', (req, res) => {
+  console.log(req.body);
+  // res.end();
+  // connection.query(`SELECT * FROM locations WHERE user = ${req.body.itineraryId}`, function(error, results, fields) {
+  //   if (error) { throw error; }
+  //   console.log(results);
+  // });
 });
 
 
