@@ -8,6 +8,7 @@ angular.module('app')
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
       $scope.mapCenter = [lat, long];
+      console.log($scope.mapCenter);
     }
 
     $scope.goAnchor = function (event) {
