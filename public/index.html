@@ -15,7 +15,13 @@
           <div class="mapContainer">
             <button ng-click="changeMapType()">Change Map Type</button>
             <ng-map center="{{mapCenter}}" zoom="13" map-type-id="MapTypeId.{{mapType}}">
-              <marker draggable="true" animation="DROP" position="{{mapCenter}}" ></marker>
+              <marker
+                draggable="true"
+                on-dragend="getCurrentLocation()"
+                animation="DROP"
+                position="{{mapCenter}}">
+
+              </marker>
             </ng-map>
           <app-dir></app-dir>
         </div>

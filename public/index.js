@@ -5,7 +5,18 @@ angular.module('app')
 
     $scope.changeMapType = function() {
       $scope.mapType === 'TERRAIN' ? $scope.mapType = 'SATELLITE' : $scope.mapType = 'TERRAIN';
+    };
+
+    $scope.getCurrentLocation = function(e) {
+      var lat = e.latLng.lat();
+      var long = e.latLng.lng();
+      console.log('lat', lat, 'long', long);
     }
+
+//     $scope.getCurrentLocation = function(event){
+//         console.log(event.latLng.lat());
+//         console.log(event.latLng.lng());
+// }
 
     $scope.goAnchor = function (event) {
       console.log(this.id);
