@@ -1,5 +1,5 @@
 angular.module('app')
-  .controller('appCtrl', function($scope, $location, appServices, NgMap, authService) {
+  .controller('appCtrl', function($scope, $location, appServices, NgMap, authService, $window) {
     if ($location.url() === '/') {
       authService.login();
     }
@@ -47,8 +47,15 @@ angular.module('app')
       });
     }
 
-    $scope.addMarker = () => {
-      console.log('ran');
+    $scope.addMarker = (place, date, desc) => {
+      var reqObj = {
+        text: place,
+        date: date,
+        desc: desc
+      }
+      appServices.sendCoords(reqObj, (res) => {
+        $window.location.reload();
+      })
     }
 
   })

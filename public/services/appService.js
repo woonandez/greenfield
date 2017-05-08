@@ -6,7 +6,7 @@ angular.module('app')
         url: '/submit_location',
         headers: { 'Content-Type': 'application/json'},
         data: {
-          cityLoc: object.cityLoc,
+          text: object.text,
           time: object.time,
           date: object.date
         }
