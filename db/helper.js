@@ -56,6 +56,11 @@ var getitineraryLocations = function(itineraryId, callback) {
 
 }
 
+module.exports.addItinerary = addItinerary;
+module.exports.addLocation = addLocation;
+module.exports.getUserItineraries = getUserItineraries;
+module.exports.getitineraryLocations  = getitineraryLocations;
+
 
 
 
