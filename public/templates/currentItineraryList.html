@@ -14,6 +14,7 @@
   <current-itinerary-entry
     ng-repeat="place in currentItineraryList.locations track by $index"
     place="currentItineraryList.locations[$index]"
+    add-marker="currentItineraryList.addMarker"
   ></current-itinerary-entry>
   </div>
 </div>
