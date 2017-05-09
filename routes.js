@@ -1,24 +1,13 @@
 var express = require('express'),
     bodyParser = require('body-parser'),
     path = require('path');
-    request = require('request');
+    request = require('request'),
+    helpers = require('./db/helper');
 
 
 var exec = require('child_process').exec;
 
 exec('mysql -u root < db/script.sql');
-
-
-
-// var mysql = require('mysql');
-
-// var connection = mysql.createConnection({
-//   host     : 'localhost',
-//   user     : 'root',
-//   password : '',
-//   database : 'piranha'
-// });
-
 
 
 
@@ -39,6 +28,13 @@ app.get('/', (req, res) => {
 // form should send request with text from an input element named 'text'
 app.post('/submit_location', (req, res) => {
 
+  // req.body === {
+  //   itineraryId: 0,
+  //   text: "google hq",
+  //   date: "July 4th",
+  //   time: "3pm"
+  // };
+
   var propertiesObj = {
     address: req.body.text,
     key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
@@ -55,14 +51,30 @@ app.post('/submit_location', (req, res) => {
       res.end(err);
     } else {
       var results = JSON.parse( body ).results[0];
-      var returnObj = {
+
+      var args = [
+        req.body.itineraryId,
+        results.formatted_address,
+        req.body.date,
+        req.body.time,
+        results.geometry.location.lat,
+        results.geometry.location.lng,
+      ];
+
+      var responseObj = {
         location: results.formatted_address,
-        coordinates: results.geometry.location,
+        visitDate: req.body.date,
+        time: req.body.time,
+        latitude: results.geometry.location.lat,
+        longitude: results.geometry.location.lng,
         placeID: results.place_id
       };
 
+      // helpers.addLocation(...args, function() {
+        res.end( JSON.stringify(responseObj) );
+      // });
 
-      res.end( JSON.stringify(returnObj) );
+
     }
   });
 });
@@ -71,41 +83,38 @@ app.post('/submit_location', (req, res) => {
 app.get('/locations_for_itinerary', (req, res) => {
   console.log(req.query.itineraryId);
   res.end( JSON.stringify( [ {
-    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
-    // visitDate: "July 4th",
+    location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+    visitDate: "July 4th",
     id: 1,
-    latitude: 38.277942,
-    longitude: -122.643732
+    latitude: 37.421999,
+    longitude: -122.0840575
   },
   {
-    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
-    // visitDate: "July 4th",
+    location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+    visitDate: "July 4th",
     id: 2,
-    latitude: 30.277942,
-    longitude: -122.643732
+    latitude: 33.421999,
+    longitude: -122.0840575
   },
   {
-    // location: "804 Corona Rd, Petaluma, CA 94954, USA",
-    // visitDate: "July 4th",
+    location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
+    visitDate: "July 4th",
     id: 3,
-    latitude: 35.277942,
-    longitude: -122.643732
+    latitude: 51.421999,
+    longitude: -122.0840575
   } ]));
-  // connection.query(`SELECT * FROM locations WHERE user = ${req.body.itineraryId}`, function(error, results, fields) {
-  //   if (error) { throw error; }
-  //   console.log(results);
-  // });
 });
 
 app.post('/login', (req, res) => {
-  console.log(req.body);
+  console.log('/login', req.body);
   // res.end();
-  // connection.query(`SELECT * FROM locations WHERE user = ${req.body.itineraryId}`, function(error, results, fields) {
-  //   if (error) { throw error; }
-  //   console.log(results);
-  // });
 });
 
+
+app.post('/signup', (req, res) => {
+  console.log('/signup', req.body);
+  // res.end();
+});
 
 
 
