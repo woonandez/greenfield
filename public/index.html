@@ -11,7 +11,7 @@
     <script src="./node_modules/angular-lock/dist/angular-lock.js"></script>
     <script src="./node_modules/angular-jwt/dist/angular-jwt.js"></script>
     <script src="./lib/ngmap/build/scripts/ng-map.js"></script>
-
+    <link rel="stylesheet" href="./style/style.css">
   </head>
 
   <body>
@@ -50,10 +50,12 @@
           <br></br>
 
           <current-itinerary-list
-            locations="locations"
+            locations="markers"
             add-marker="addMarker">
           </current-itinerary-list>
+
           <app-dir></app-dir>
+
         </div>
 
       </div>
