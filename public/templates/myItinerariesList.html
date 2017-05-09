@@ -1,0 +1,14 @@
+<div class="myItineraries">
+
+  <div>
+    <button ng-click="switch('currentItinerary')">Switch to Current Itinerary Map View</button>
+  </div>
+
+  <h3>My Itineraries</h3>
+  <my-itineraries-entry
+    ng-repeat="itinerary in myItinerariesList.userItineraries track by $index"
+    itinerary="myItinerariesList.userItineraries[$index]"
+    changeCurrentItinerary="myItinerariesList.changeCurrentItinerary"
+  ></my-itineraries-entry>
+
+</div>
