@@ -29,13 +29,14 @@ var addLocation = function(itineraryId, location, visitDate, time, longitude, la
 }
 
 var getUserItineraries = function(userId, callback) {
+
   model.itineraries.findAll({
     where: {
       userId: userId
     },
     include: [{
-    model: model.locations
-  }]
+      model: model.locations
+    }]
   }).then(function(result) {
     callback(result);
   })
@@ -47,19 +48,43 @@ var getitineraryLocations = function(itineraryId, callback) {
   model.itineraries.findAll({
 
     include: [{
-    model: model.locations,
-    where: {id_itineraries: itineraryId}
-  }]
+      model: model.locations,
+      where: {id_itineraries: itineraryId}
+    }]
   }).then(function(result) {
     callback(result);
   })
 
 }
 
+var addEvents = function(location, time, description, callback) {
+
+  model.events.create({
+    location: location,
+    time: time,
+    description: description
+  }).then(function(result) {
+    callback(result);
+  });
+}
+
+var getLocationsEvents = function(locationId, callback) {
+  model.locations.findAll({
+    include: [{
+      model: model.events,
+      where: {id_locations: locationId}
+    }]
+  }).then(function(result) {
+    callback(result);
+  });
+}
+
 module.exports.addItinerary = addItinerary;
 module.exports.addLocation = addLocation;
 module.exports.getUserItineraries = getUserItineraries;
 module.exports.getitineraryLocations  = getitineraryLocations;
+module.exports.addEvents = addEvents;
+module.exports.getLocationsEvents = getLocationsEvents;
 
 
 
