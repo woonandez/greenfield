@@ -11,7 +11,7 @@
     <script src="./node_modules/angular-lock/dist/angular-lock.js"></script>
     <script src="./node_modules/angular-jwt/dist/angular-jwt.js"></script>
     <script src="./lib/ngmap/build/scripts/ng-map.js"></script>
-
+    <link rel="stylesheet" href="./style/style.css">
   </head>
 
   <body>
@@ -32,6 +32,7 @@
 
           <div class="mapContainer">
             <ng-map
+
               ng-if="isAuthenticated"
               center="{{mapCenter}}"
               zoom="13"
