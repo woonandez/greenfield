@@ -27,6 +27,10 @@ angular.module('app')
       });
     };
 
+    this.authenticateOnRefresh = () => {
+      authManager.authenticate();
+    };
+
     this.logout = () => {
       localStorage.removeItem('id_token');
       authManager.unauthenticate();

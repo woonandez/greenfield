@@ -1,8 +1,15 @@
 angular.module('app')
   .controller('appCtrl', function($scope, $location, appServices, NgMap, authService, $window) {
-    if ($location.url() === '/') {
+
+    if ( localStorage.getItem('id_token') ) {
+      authService.authenticateOnRefresh();
+    }
+
+    if ($location.url() === '/' && !localStorage.getItem('id_token') ) {
       authService.login();
     }
+
+
     $scope.markers = [];
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
