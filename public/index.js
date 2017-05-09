@@ -9,7 +9,6 @@ angular.module('app')
       authService.login();
     }
 
-
     $scope.markers = [];
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
@@ -27,7 +26,6 @@ angular.module('app')
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
       $scope.mapCenter = [lat, long];
-      console.log($scope.mapCenter, 'mapCenter')
     }
 
     $scope.goAnchor = (event) => {
@@ -54,15 +52,16 @@ angular.module('app')
       });
     }
 
-    $scope.addMarker = (place, date, desc) => {
+    $scope.addMarker = (place, date, time, desc) => {
       var reqObj = {
         text: place,
         date: date,
+        time: time,
         desc: desc
       }
       appServices.sendCoords(reqObj, (res) => {
         $window.location.reload();
-      })
+      });
     }
 
   })
@@ -70,3 +69,11 @@ angular.module('app')
   .controller('loginCtrl', (authService) => {
     var vm = this;
   });
+
+
+  // req.body === {
+  //   itineraryId: 0,
+  //   text: "google hq",
+  //   date: "July 4th",
+  //   time: "3pm"
+  // };
