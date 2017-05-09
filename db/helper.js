@@ -28,4 +28,34 @@ var addLocation = function(itineraryId, location, visitDate, time, longitude, la
 
 }
 
+var getUserItineraries = function(userId, callback) {
+  model.itineraries.findAll({
+    where: {
+      userId: userId
+    },
+    include: [{
+    model: model.locations
+  }]
+  }).then(function(result) {
+    callback(result);
+  })
+
+}
+
+var getitineraryLocations = function(itineraryId, callback) {
+
+  model.itineraries.findAll({
+
+    include: [{
+    model: model.locations,
+    where: {id_itineraries: itineraryId}
+  }]
+  }).then(function(result) {
+    callback(result);
+  })
+
+}
+
+
+
 
