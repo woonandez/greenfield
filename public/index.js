@@ -56,11 +56,3 @@ angular.module('app')
   .controller('loginCtrl', (authService) => {
     var vm = this;
   });
-
-
-  // req.body === {
-  //   itineraryId: 0,
-  //   text: "google hq",
-  //   date: "July 4th",
-  //   time: "3pm"
-  // };
