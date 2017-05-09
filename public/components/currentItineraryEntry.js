@@ -7,7 +7,7 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
-      controller: () => {},
+      controller: function() {},
       templateUrl: '../templates/currentItineraryEntry.html'
     }
   });

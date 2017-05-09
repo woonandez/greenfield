@@ -40,10 +40,19 @@
                 draggable="true"
                 on-dragend="getCurrentLocation()"
                 animation="DROP"
-                position="{{mapCenter}}" />
+                position="{{mapCenter}}">
+              </marker>
+              <marker
+                ng-repeat="marker in markers"
+                position="[{{marker.latitude}}, {{marker.longitude}}]">
+              </marker>
             </ng-map>
           <br></br>
-          <current-itinerary-list locations="locations"></current-itinerary-list>
+
+          <current-itinerary-list
+            locations="locations"
+            add-marker="addMarker">
+          </current-itinerary-list>
           <app-dir></app-dir>
         </div>
 

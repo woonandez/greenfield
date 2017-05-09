@@ -14,10 +14,10 @@ angular.module('app')
             'user_id': authResult.idToken
           }
         })
-        .then( (res) => {
+        .then((res) => {
           console.log(res);
         })
-        .catch( (error) => {
+        .catch((error) => {
           console.error(error);
         });
       });
