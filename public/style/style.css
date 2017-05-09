@@ -6,6 +6,33 @@ body {
 
 .listForm {
   display: flex;
+  padding: 10px;
+  margin: 10px;
   border: 10px solid(0, 0, 0, 0.3);
   border-radius: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.listForm > * {
+  flex: 1 1;
+  padding: 5px;
+  margin: 5px;
+}
+
+.entryListContainer {
+  display: flex;
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 100;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.currentItineraryEntry {
+  flex: 1 1 100%;
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid black;
 }
