@@ -49,6 +49,7 @@ angular.module('app')
     }
 
     NgMap.getMap().then((map) => {
+      console.log($scope.markers, 'markers');
       map.getCenter();
       $scope.getMarkerLocations();
     });
@@ -64,6 +65,7 @@ angular.module('app')
     }
 
     $scope.addMarker = (place, date, time, desc) => {
+      console.log('ran');
       var reqObj = {
         text: place,
         date: date,
@@ -71,6 +73,7 @@ angular.module('app')
         desc: desc
       }
       appServices.sendCoords(reqObj, (res) => {
+        console.log(res, 'response obj');
         $window.location.reload();
       });
     }
