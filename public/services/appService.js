@@ -21,7 +21,7 @@ angular.module('app')
         method: 'GET',
         url: '/locations_for_itinerary',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-        q: {
+        params: {
           itineraryId: 1
         }
       }).then((data) => {

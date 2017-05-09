@@ -30,8 +30,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `id` INTEGER NOT NULL AUTO_INCREMENT,
   `location` VARCHAR(200) NOT NULL,
   `time` TEXT NOT NULL,
-  `description` TEXT NOT NULL ,
-  `id_locations` INTEGER NULL,
+  `description` TEXT NOT NULL,
+  `id_locations` INTEGER NOT NULL,
   `createdAt` DATETIME NOT NULL,
   `updatedAt` DATETIME NOT NULL,
   PRIMARY KEY (`id`)

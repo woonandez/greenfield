@@ -132,10 +132,16 @@ app.get('/locations_for_itinerary', (req, res) => {
   db.getitineraryLocations(req.query.itineraryId, (result) => {
     // console.log('result: ', result[0].dataValues.locations);
 
+
+
     var array = [];
-    for (var instance of result[0].dataValues.locations) {
-      array.push(instance.dataValues);
+
+    if (result.length) {
+      for (var instance of result[0].dataValues.locations) {
+        array.push(instance.dataValues);
+      }
     }
+
 
     console.log('result: ', array);
 
@@ -188,14 +194,16 @@ app.post('/login', (req, res) => {
   // userID = userID.join('.');
   // console.log('USERID', userID);
 
-  db.getUserItineraries(userID, (result) => {
+  db.getUserItineraries(req.body.user_id, (result) => {
+
+    console.log('USERid: ', req.body.user_id);
     if (!result.length) {
       db.addItinerary("default", "start", "end", req.body.user_id, function(result) {
         console.log("result: ", result.dataValues.id);
         res.end( JSON.stringify(result.dataValues.id) );
       });
     } else {
-      res.end(result[0].dataValues.id);
+      res.end( JSON.stringify(result[0].dataValues.id) );
     }
   });
 });
@@ -212,3 +220,4 @@ app.post('/signup', (req, res) => {
 
 
 module.exports = app;
+
