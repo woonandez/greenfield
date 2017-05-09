@@ -188,14 +188,14 @@ app.post('/login', (req, res) => {
   // userID = userID.join('.');
   // console.log('USERID', userID);
 
-  db.getUserItineraries(userID, (result) => {
+  db.getUserItineraries(req.body.user_id, (result) => {
     if (!result.length) {
       db.addItinerary("default", "start", "end", req.body.user_id, function(result) {
         console.log("result: ", result.dataValues.id);
         res.end( JSON.stringify(result.dataValues.id) );
       });
     } else {
-      res.end(result[0].dataValues.id);
+      res.end( JSON.stringify(result[0].dataValues.id) );
     }
   });
 });
@@ -212,3 +212,4 @@ app.post('/signup', (req, res) => {
 
 
 module.exports = app;
+
