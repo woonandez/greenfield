@@ -1,39 +1,56 @@
 angular.module('app')
   .controller('appCtrl', function($scope, $location, appServices, NgMap, authService, $window) {
-    if ($location.url() === '/') {
+
+    if ( localStorage.getItem('id_token') ) {
+      authService.authenticateOnRefresh();
+    }
+
+    if (!localStorage.getItem('id_token') ) {
       authService.login();
     }
-    $scope.markers = [];
-    $scope.mapCenter = 'San Francisco';
-    $scope.mapType = 'TERRAIN';
-    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}];
 
     $scope.activate = () => {
       console.log(localStorage.getItem('id_token'));
     }
 
-    // Placeholder
-    // Query database for locations
-      // Create markers with longitude and latitude
+    // Placeholder data
+    $scope.userItineraries = [{'id': 1, 'name': 'Europe Vacation', date: 'September 2017'},
+                              {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
+                              {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
+
+    $scope.changeCurrentItinerary = (desiredItinerary) => {
+      $scope.locations = [];
+      // Loop through all locations in desired itinerary and add to locations list
+    }
+
+    $scope.viewport = 'currentItinerary';
+    $scope.switch = (viewport) => {
+      $scope.viewport = viewport;
+      if ($scope.viewport === 'currentItinerary') {
+        console.log('Back');
+      } else {
+        $scope.template = '/templates/myItinerariesList.html'
+        console.log('New');
+      }
+    }
+
+    $scope.markers = [];
+    $scope.mapCenter = 'San Francisco';
+    $scope.mapType = 'TERRAIN';
+
+    $scope.activate = () => {
+      console.log(localStorage.getItem('id_token'));
+    }
 
     $scope.getCurrentLocation = (e) => {
       var lat = e.latLng.lat();
       var long = e.latLng.lng();
       $scope.mapCenter = [lat, long];
-      console.log($scope.mapCenter, 'mapCenter')
-    }
-
-    $scope.goAnchor = (event) => {
-      console.log(this.id);
-      gotoAnchor(this.id);
     }
 
     NgMap.getMap().then((map) => {
       map.getCenter();
       $scope.getMarkerLocations();
-      console.log(map);
-      // this function will be used to initialize all of the different markers on the map
-        // the markers that correspond to the items in the itinerary
     });
 
     $scope.searchLocation = (newLoc) => {
@@ -43,19 +60,19 @@ angular.module('app')
     $scope.getMarkerLocations = () => {
       appServices.getMarkers('param', ({data}) => {
         data.forEach(d => $scope.markers.push(d));
-        console.log($scope.markers, 'markers');
       });
     }
 
-    $scope.addMarker = (place, date, desc) => {
+    $scope.addMarker = (place, date, time, desc) => {
       var reqObj = {
         text: place,
         date: date,
+        time: time,
         desc: desc
       }
       appServices.sendCoords(reqObj, (res) => {
         $window.location.reload();
-      })
+      });
     }
 
   })
