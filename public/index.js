@@ -5,14 +5,38 @@ angular.module('app')
       authService.authenticateOnRefresh();
     }
 
-    if ($location.url() === '/' && !localStorage.getItem('id_token') ) {
+    if (!localStorage.getItem('id_token') ) {
       authService.login();
+    }
+
+    $scope.activate = () => {
+      console.log(localStorage.getItem('id_token'));
+    }
+
+    // Placeholder data
+    $scope.userItineraries = [{'id': 1, 'name': 'Europe Vacation', date: 'September 2017'},
+                              {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
+                              {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
+
+    $scope.changeCurrentItinerary = (desiredItinerary) => {
+      $scope.locations = [];
+      // Loop through all locations in desired itinerary and add to locations list
+    }
+
+    $scope.viewport = 'currentItinerary';
+    $scope.switch = (viewport) => {
+      $scope.viewport = viewport;
+      if ($scope.viewport === 'currentItinerary') {
+        console.log('Back');
+      } else {
+        $scope.template = '/templates/myItinerariesList.html'
+        console.log('New');
+      }
     }
 
     $scope.markers = [];
     $scope.mapCenter = 'San Francisco';
     $scope.mapType = 'TERRAIN';
-    $scope.locations = [{'name': 'Chicago'}, {'name': 'Los Angeles'}, {'name': 'Boston'}];
 
     $scope.activate = () => {
       console.log(localStorage.getItem('id_token'));
