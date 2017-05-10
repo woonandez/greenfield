@@ -9,7 +9,6 @@ angular.module('app')
       controllerAs: 'currentItineraryList',
       bindToController: true,
       controller: function() {
-        console.log(this);
       },
       templateUrl: '../templates/currentItineraryList.html'
     }
