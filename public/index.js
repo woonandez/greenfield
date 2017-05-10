@@ -64,7 +64,7 @@ angular.module('app')
         }
 
         this.addMarker = (place, date, time, desc) => {
-          console.log('ran');
+          var destination = this.mapCenter === place ? place : this.mapCenter;
           var reqObj = {
             text: place,
             date: date,
