@@ -1,5 +1,8 @@
 angular.module('app')
   .controller('appCtrl', function($scope, $location, appServices, NgMap, authService, $window) {
+    $scope.markers = [];
+    $scope.mapCenter = 'San Francisco';
+    $scope.mapType = 'TERRAIN';
 
     if ( localStorage.getItem('id_token') ) {
       authService.authenticateOnRefresh();
@@ -8,9 +11,6 @@ angular.module('app')
     if (!localStorage.getItem('id_token') ) {
       authService.login();
     }
-    $scope.markers = [];
-    $scope.mapCenter = 'San Francisco';
-    $scope.mapType = 'TERRAIN';
 
     $scope.activate = () => {
       console.log(localStorage.getItem('id_token'));
@@ -36,7 +36,6 @@ angular.module('app')
         console.log('New');
       }
     }
-
 
     $scope.getCurrentLocation = (e) => {
       var lat = e.latLng.lat();
