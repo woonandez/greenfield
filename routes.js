@@ -111,6 +111,38 @@ app.post('/submit_location', (req, res) => {
   });
 });
 
+
+
+
+
+app.post('/location_by_coords', (req, res) => {
+
+  // latlng
+  console.log(req.body);
+
+  var propertiesObj = {
+    latlng: req.body.latitude + ',' + req.body.longitude,
+    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
+  };
+  console.log(propertiesObj);
+
+  var params = {
+    url: 'https://maps.googleapis.com/maps/api/geocode/json',
+    qs: propertiesObj
+  };
+
+  request(params, function(err, response, body) {
+    if (err) {
+      console.log(err);
+      res.end(err);
+    } else {
+      var results = JSON.parse( body ).results[0];
+      res.end( JSON.stringify(results.formatted_address) );
+    }
+  });
+});
+
+
 // /my_itinerary
 // /current_itinerary
 
