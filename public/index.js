@@ -56,7 +56,7 @@ angular.module('app')
 
     $scope.getMarkerLocations = () => {
       appServices.getMarkers('param', ({data}) => {
-        data[0].locations.forEach(d => $scope.markers.push(d));
+        data.forEach(d => $scope.markers.push(d));
       });
     }
 
