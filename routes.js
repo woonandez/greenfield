@@ -6,6 +6,7 @@ var express = require('express'),
     jwt = require('jwt-simple');
 
 
+var public = path.join(__dirname + '/public/');
 
 
 // var viewPath = path.join(__dirname+'/public/views/');
@@ -32,16 +33,17 @@ app.set('jwtTokenSecret', '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAU
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
-app.get('/', (req, res) => {
-  res.redirect('/current');
-});
+// app.get('/', (req, res) => {
+//   res.redirect('/current');
+// });
 
 app.get('/current', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  console.log(public);
+  res.sendFile(public + 'index.html');
 });
 
 app.get('/itineraries', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(public + 'index.html');
 });
 
 
@@ -211,7 +213,7 @@ app.post('/signup', (req, res) => {
 });
 
 
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
   res.redirect('/current');
 });
 
