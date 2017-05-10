@@ -8,6 +8,9 @@ angular.module('app')
     if (!localStorage.getItem('id_token') ) {
       authService.login();
     }
+    $scope.markers = [];
+    $scope.mapCenter = 'San Francisco';
+    $scope.mapType = 'TERRAIN';
 
     $scope.activate = () => {
       console.log(localStorage.getItem('id_token'));
@@ -34,13 +37,6 @@ angular.module('app')
       }
     }
 
-    $scope.markers = [];
-    $scope.mapCenter = 'San Francisco';
-    $scope.mapType = 'TERRAIN';
-
-    $scope.activate = () => {
-      console.log(localStorage.getItem('id_token'));
-    }
 
     $scope.getCurrentLocation = (e) => {
       var lat = e.latLng.lat();
@@ -49,6 +45,7 @@ angular.module('app')
     }
 
     NgMap.getMap().then((map) => {
+      console.log($scope.markers, 'markers');
       map.getCenter();
       $scope.getMarkerLocations();
     });
@@ -59,11 +56,12 @@ angular.module('app')
 
     $scope.getMarkerLocations = () => {
       appServices.getMarkers('param', ({data}) => {
-        data.forEach(d => $scope.markers.push(d));
+        data[0].locations.forEach(d => $scope.markers.push(d));
       });
     }
 
     $scope.addMarker = (place, date, time, desc) => {
+      console.log('ran');
       var reqObj = {
         text: place,
         date: date,
@@ -71,6 +69,7 @@ angular.module('app')
         desc: desc
       }
       appServices.sendCoords(reqObj, (res) => {
+        console.log(res, 'response obj');
         $window.location.reload();
       });
     }
