@@ -1,7 +1,6 @@
 body {
   font-family: sans-serif;
   margin: 0;
-  overflow: hidden;
 }
 
 .listForm {
@@ -24,7 +23,7 @@ body {
   display: flex;
   border: 1px solid black;
   border-radius: 5px;
-  height: 100;
+  height: 100vh;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
