@@ -1,9 +1,14 @@
 <div class="app">
 
   <div>
-    <button ng-click="app.switch('myItineraries')">Switch to My Itineraries View</button>
+    <button ng-click="app.switch('itineraries')">Switch to My Itineraries View</button>
   </div>
 
-  <app-body ng-include src="app.template"></app-body>
+  <div ng-if="app.authenticated">
+    <button class="btn btn-primary" ng-click="app.service.logout()">Log Out</button>
+    <p>Thank you for logging in!</p>
+  </div>
+
+  <app-body ng-if="app.authenticated" ng-include src="app.template"></app-body>
 
 </div>
