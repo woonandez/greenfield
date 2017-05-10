@@ -33,8 +33,18 @@ app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
+  res.redirect('/current');
+});
+
+app.get('/current', (req, res) => {
   res.sendFile('index.html');
 });
+
+app.get('/itineraries', (req, res) => {
+  res.sendFile('index.html');
+});
+
+
 
 
 
@@ -99,6 +109,8 @@ app.post('/submit_location', (req, res) => {
   });
 });
 
+// /my_itinerary
+// /current_itinerary
 
 
 
