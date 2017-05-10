@@ -1,36 +1,9 @@
-<div class="app">
+<div class="app" ng-init="app.switch('current')">
 
   <div>
     <button ng-click="app.switch('myItineraries')">Switch to My Itineraries View</button>
   </div>
 
-  <search search-location="app.searchLocation"></search>
-
-    <div class="mapContainer">
-      <ng-map
-        center="{{app.mapCenter}}"
-        zoom="13"
-        map-type-id="MapTypeId.{{app.mapType}}">
-        <marker
-          draggable="true"
-          on-dragend="app.getCurrentLocation()"
-          animation="DROP"
-          position="{{app.mapCenter}}">
-        </marker>
-
-        <marker
-          ng-repeat="icon in app.markers"
-          position="{{ icon.location }}">
-        </marker>
-      </ng-map>
-    </div>
-
-  <div class="listContainer">
-    <current-itinerary-list
-      locations="app.markers"
-      viewport="app.viewport"
-      add-marker="app.addMarker">
-    </current-itinerary-list>
-  </div>
+  <app-body ng-include src="app.template"></app-body>
 
 </div>

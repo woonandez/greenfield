@@ -30,15 +30,9 @@ angular.module('app')
           // Loop through all locations in desired itinerary and add to locations list
         }
 
-        this.viewport = 'currentItinerary';
         this.switch = (viewport) => {
-          this.viewport = viewport;
-          if (this.viewport === 'currentItinerary') {
-            console.log('Back');
-          } else {
-            // this.templateUrl = '/templates/myItinerariesList.html'
-            console.log('New');
-          }
+          this.template = 'templates/' + viewport + '.html';
+          $location.path(viewport);
         }
 
         this.getCurrentLocation = (e) => {
