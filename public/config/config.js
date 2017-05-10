@@ -1,5 +1,10 @@
 angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
-  .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider, $httpProvider) {
+  .config(function($sceDelegateProvider, $stateProvider, lockProvider, $urlRouterProvider, $httpProvider, $locationProvider) {
+    $locationProvider.html5Mode({
+      enabled: true,
+      requireBase: false
+    });
+
     $sceDelegateProvider.resourceUrlWhitelist([
       'self',
       'https://maps.googleapis.com/maps/**'
