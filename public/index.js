@@ -36,7 +36,7 @@ angular.module('app')
           if (this.viewport === 'currentItinerary') {
             console.log('Back');
           } else {
-            this.template = '/templates/myItinerariesList.html'
+            // this.templateUrl = '/templates/myItinerariesList.html'
             console.log('New');
           }
         }
