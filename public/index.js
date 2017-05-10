@@ -44,10 +44,9 @@ angular.module('app')
             latitude: lat,
             longitude: long,
           }
-          appServices.getLocation(latLong, function(res) {
-            console.log(res, 'this is the response');
-          })
-          this.mapCenter = [lat, long];
+          appServices.getLocation(latLong, (res) => {
+            this.mapCenter = res.data;
+          });
         }
 
         NgMap.getMap().then( (map) => {
