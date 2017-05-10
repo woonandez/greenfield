@@ -1,10 +1,9 @@
 angular.module('app')
   .directive('app', function(authService) {
+
     if ( localStorage.getItem('id_token') ) {
       authService.authenticateOnRefresh();
-    }
-
-    if ( !localStorage.getItem('id_token') ) {
+    } else {
       authService.login();
     }
 
@@ -25,15 +24,17 @@ angular.module('app')
                                 {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
                                 {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
 
-        this.changeCurrentItinerary = (desiredItinerary) => {
-          this.locations = [];
-          // Loop through all locations in desired itinerary and add to locations list
-        }
-
         this.switch = (viewport) => {
           this.template = 'templates/' + viewport + '.html';
           $location.path(viewport);
         }
+
+        if ( $location.url() !== '/' ) {
+          this.template = 'templates/' + $location.url() + '.html';
+        } else {
+          this.switch('current');
+        }
+
 
         this.getCurrentLocation = (e) => {
           var lat = e.latLng.lat();
