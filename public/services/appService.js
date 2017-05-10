@@ -28,4 +28,18 @@ angular.module('app')
         callback(res);
       })
     }
+
+    this.getLocation = function(object, callback) {
+      http({
+        method: 'POST',
+        url: '/find_location',
+        headers: { 'Content-Type': 'application/json'},
+        data: {
+          latitude: object.latitude,
+          longitude: object.longitude
+        }
+      }).then((res) => {
+        callback(res);
+      });
+    }
   });
