@@ -49,9 +49,10 @@
                 animation="DROP"
                 position="{{mapCenter}}">
               </marker>
+
               <marker
-                ng-repeat="marker in markers"
-                position="[{{marker.latitude}}, {{marker.longitude}}]">
+                ng-repeat="icon in markers"
+                position="{{ icon.location }}">
               </marker>
             </ng-map>
           <br></br>
