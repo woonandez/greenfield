@@ -4,9 +4,10 @@ angular.module('app')
 run.$inject = ['$rootScope', 'authService', 'lock'];
 
 function run($rootScope, authService, lock) {
-    $rootScope.authService = authService;
+  $rootScope.authService = authService;
 
-    authService.registerAuthenticationListener();
+  authService.registerAuthenticationListener();
 
-    lock.interceptHash();
+  lock.interceptHash();
 }
+

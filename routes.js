@@ -2,8 +2,8 @@ var express = require('express'),
     bodyParser = require('body-parser'),
     path = require('path');
     request = require('request'),
-    db = require('./db/helper');
-
+    db = require('./db/helper'),
+    jwt = require('jwt-simple');
 
 var exec = require('child_process').exec;
 
@@ -12,8 +12,27 @@ exec('mysql -u root < db/script.sql');
 
 
 
+
 // var viewPath = path.join(__dirname+'/public/views/');
 var app = express();
+
+// app.use(jwt({
+//   secret: '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu'
+// }));
+
+
+
+
+app.set('jwtTokenSecret', '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu');
+
+// Inside of GET route for login:
+
+
+
+
+
+
+
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
@@ -33,6 +52,10 @@ app.post('/submit_location', (req, res) => {
   //   date: "July 4th",
   //   time: "3pm"
   // };
+
+
+  // console.log(process.env);
+
 
   var propertiesObj = {
     address: req.body.text,
@@ -115,10 +138,26 @@ app.get('/locations_for_itinerary', (req, res) => {
   //   itineraryId: 0
   // }
 
-  console.log(req.query.itineraryId);
+  console.log('query: ', req.query);
+
 
   db.getitineraryLocations(req.query.itineraryId, (result) => {
-    res.end( JSON.stringify(result) );
+    // console.log('result: ', result[0].dataValues.locations);
+
+
+
+    var array = [];
+
+    if (result.length) {
+      for (var instance of result[0].dataValues.locations) {
+        array.push(instance.dataValues);
+      }
+    }
+
+
+    console.log('result: ', array);
+
+    res.end( JSON.stringify(array) );
   });
 
 
@@ -158,12 +197,27 @@ app.post('/login', (req, res) => {
   //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
   // }
 
-  console.log('/login', req.body);
-  db.getUserItineraries(req.body.user_id, (res) => {
-    if (!res.length) {
-      db.addItinerary(req.body.name, req.body.start, req.body.end, req.body.userId, function() {
-        res.end('itinerary created for new user');
+  // console.log('/login', req.body);
+  console.log('USERID', req.body.user_id);
+  // console.log(process.env);
+
+  // var userID = req.body.user_id.split('.');
+  // userID.pop();
+  // userID = userID.join('.');
+  // console.log('USERID', userID);
+  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
+  console.log(decoded.sub);
+
+  db.getUserItineraries(req.body.user_id, (result) => {
+
+    console.log('USERid: ', req.body.user_id);
+    if (!result.length) {
+      db.addItinerary("default", "start", "end", req.body.user_id, function(result) {
+        console.log("result: ", result.dataValues.id);
+        res.end( JSON.stringify(result.dataValues.id) );
       });
+    } else {
+      res.end( JSON.stringify(result[0].dataValues.id) );
     }
   });
 });
@@ -180,3 +234,4 @@ app.post('/signup', (req, res) => {
 
 
 module.exports = app;
+
