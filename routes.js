@@ -3,8 +3,7 @@ var express = require('express'),
     path = require('path');
     request = require('request'),
     db = require('./db/helper'),
-    jwt = require('express-jwt');
-
+    jwt = require('jwt-simple');
 
 var exec = require('child_process').exec;
 
@@ -20,6 +19,19 @@ var app = express();
 // app.use(jwt({
 //   secret: '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu'
 // }));
+
+
+
+
+app.set('jwtTokenSecret', '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu');
+
+// Inside of GET route for login:
+
+
+
+
+
+
 
 
 app.use(bodyParser());
@@ -193,6 +205,8 @@ app.post('/login', (req, res) => {
   // userID.pop();
   // userID = userID.join('.');
   // console.log('USERID', userID);
+  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
+  console.log(decoded.sub);
 
   db.getUserItineraries(req.body.user_id, (result) => {
 
