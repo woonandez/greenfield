@@ -35,8 +35,6 @@
 
         <search search-location="searchLocation"></search>
 
-          <br></br>
-
           <div class="mapContainer">
             <ng-map
               ng-if="isAuthenticated"
@@ -55,16 +53,15 @@
                 position="{{ icon.location }}">
               </marker>
             </ng-map>
-          <br></br>
+          </div>
 
+        <div class="listContainer">
           <current-itinerary-list
             locations="markers"
             viewport="viewport"
             add-marker="addMarker">
           </current-itinerary-list>
-
           <app-dir></app-dir>
-
         </div>
 
       </div>
