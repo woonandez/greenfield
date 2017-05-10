@@ -18,14 +18,7 @@
 
     <div ng-app="app">
 
-      <h1>Team PIRANHA!!!!</h1>
-
-      <div ng-if="isAuthenticated">
-        <button class="btn btn-primary" ng-click="authService.logout()">Log Out</button>
-        <p>Thank you for logging in!</p>
-      </div>
-
-      <app ng-if="isAuthenticated"></app>
+      <app authenticated="isAuthenticated" service="authService"></app>
 
     </div>
 
