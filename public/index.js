@@ -1,19 +1,21 @@
 angular.module('app')
-  .directive('app', function(authService) {
-    if ( localStorage.getItem('id_token') ) {
-      authService.authenticateOnRefresh();
-    }
+  .directive('app', function() {
 
-    if ( !localStorage.getItem('id_token') ) {
-      authService.login();
-    }
 
     return {
-      scope: {},
+      scope: {
+        authenticated: '<',
+        service: '<'
+      },
       restrict: 'E',
       controllerAs: 'app',
       bindToController: true,
-      controller: function($location, appServices, NgMap, $window) {
+      controller: function($location, appServices, NgMap, $window, authService) {
+        if ( localStorage.getItem('id_token') ) {
+          authService.authenticateOnRefresh();
+        } else {
+          authService.login();
+        }
 
         this.markers = [];
         this.mapCenter = 'San Francisco';
@@ -25,21 +27,18 @@ angular.module('app')
                                 {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
                                 {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
 
-        this.changeCurrentItinerary = (desiredItinerary) => {
-          this.locations = [];
-          // Loop through all locations in desired itinerary and add to locations list
+        this.switch = (viewport) => {
+          this.template = 'templates/' + viewport + '.html';
+          $location.path(viewport);
         }
 
-        this.viewport = 'currentItinerary';
-        this.switch = (viewport) => {
-          this.viewport = viewport;
-          if (this.viewport === 'currentItinerary') {
-            console.log('Back');
-          } else {
-            this.template = '/templates/myItinerariesList.html'
-            console.log('New');
-          }
+        console.log($location.url());
+        if ( $location.url() !== '/' ) {
+          this.template = 'templates/' + $location.url() + '.html';
+        } else {
+          this.switch('current');
         }
+
 
         this.getCurrentLocation = (e) => {
           var lat = e.latLng.lat();

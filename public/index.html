@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Hello World</title>
+    <title>Itinerary App</title>
     <script src="./lib/angular/angular.js"></script>
     <script src="http://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="https://cdn.auth0.com/js/lock/10.15/lock.min.js"></script>
@@ -18,19 +18,7 @@
 
     <div ng-app="app">
 
-
-      <h1>Team PIRANHA!!!!</h1>
-
-      <div ng-if="isAuthenticated">
-        <button ng-click="switch('myItineraries')">Switch to My Itineraries View</button>
-      </div>
-
-      <div ng-if="isAuthenticated">
-        <button class="btn btn-primary" ng-click="authService.logout()">Log Out</button>
-        <p>Thank you for logging in!</p>
-      </div>
-
-      <app ng-if="isAuthenticated"></app>
+      <app authenticated="isAuthenticated" service="authService"></app>
 
     </div>
 

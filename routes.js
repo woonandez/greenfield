@@ -5,11 +5,6 @@ var express = require('express'),
     db = require('./db/helper'),
     jwt = require('jwt-simple');
 
-var exec = require('child_process').exec;
-
-exec('mysql -u root < db/script.sql');
-
-
 
 
 
@@ -38,8 +33,18 @@ app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html');
+  res.redirect('/current');
 });
+
+app.get('/current', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+app.get('/itineraries', (req, res) => {
+  res.sendFile(__dirname + '/public/index.html');
+});
+
+
 
 
 
@@ -104,6 +109,8 @@ app.post('/submit_location', (req, res) => {
   });
 });
 
+// /my_itinerary
+// /current_itinerary
 
 
 
@@ -159,34 +166,6 @@ app.get('/locations_for_itinerary', (req, res) => {
 
     res.end( JSON.stringify(array) );
   });
-
-
-  // ------------- dummy data -------------
-  // res.end( JSON.stringify( [ {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 1,
-  //   latitude: 37.421999,
-  //   longitude: -122.0840575
-  // },
-  // {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 2,
-  //   latitude: 33.421999,
-  //   longitude: -122.0840575
-  // },
-  // {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 3,
-  //   latitude: 51.421999,
-  //   longitude: -122.0840575
-  // } ]));
-  // ---------------------------------------
-
-
-
 });
 
 
@@ -231,6 +210,10 @@ app.post('/signup', (req, res) => {
   // res.end();
 });
 
+
+app.get('/*', (req, res) => {
+  res.redirect('/current');
+});
 
 
 module.exports = app;
