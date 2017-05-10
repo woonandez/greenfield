@@ -5,11 +5,6 @@ var express = require('express'),
     db = require('./db/helper'),
     jwt = require('jwt-simple');
 
-var exec = require('child_process').exec;
-
-exec('mysql -u root < db/script.sql');
-
-
 
 
 
@@ -159,34 +154,6 @@ app.get('/locations_for_itinerary', (req, res) => {
 
     res.end( JSON.stringify(array) );
   });
-
-
-  // ------------- dummy data -------------
-  // res.end( JSON.stringify( [ {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 1,
-  //   latitude: 37.421999,
-  //   longitude: -122.0840575
-  // },
-  // {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 2,
-  //   latitude: 33.421999,
-  //   longitude: -122.0840575
-  // },
-  // {
-  //   location: "1600 Amphitheatre Pkwy, Mountain View, CA 94043, USA",
-  //   visitDate: "July 4th",
-  //   id: 3,
-  //   latitude: 51.421999,
-  //   longitude: -122.0840575
-  // } ]));
-  // ---------------------------------------
-
-
-
 });
 
 
