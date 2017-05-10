@@ -37,11 +37,11 @@ app.get('/', (req, res) => {
 });
 
 app.get('/current', (req, res) => {
-  res.sendFile('index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 app.get('/itineraries', (req, res) => {
-  res.sendFile('index.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 
