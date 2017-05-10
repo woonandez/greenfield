@@ -1,8 +1,10 @@
 <div class="app">
 
-  <div>
-    <button ng-click="app.switch('myItineraries')">Switch to My Itineraries View</button>
-  </div>
+  <nav>
+    <div ng-click="app.switch('current')">Current Itinerary</div>
+    <div ng-click="app.switch('itineraries')">Itineraries</div>
+    <div class="btn btn-primary" ng-click="app.service.logout()">Log Out</div>
+  </nav>
 
   <app-body ng-include src="app.template"></app-body>
 

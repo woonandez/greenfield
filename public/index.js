@@ -1,18 +1,21 @@
 angular.module('app')
-  .directive('app', function(authService) {
+  .directive('app', function() {
 
-    if ( localStorage.getItem('id_token') ) {
-      authService.authenticateOnRefresh();
-    } else {
-      authService.login();
-    }
 
     return {
-      scope: {},
+      scope: {
+        authenticated: '<',
+        service: '<'
+      },
       restrict: 'E',
       controllerAs: 'app',
       bindToController: true,
-      controller: function($location, appServices, NgMap, $window) {
+      controller: function($location, appServices, NgMap, $window, authService) {
+        if ( localStorage.getItem('id_token') ) {
+          authService.authenticateOnRefresh();
+        } else {
+          authService.login();
+        }
 
         this.markers = [];
         this.mapCenter = 'San Francisco';
@@ -29,6 +32,7 @@ angular.module('app')
           $location.path(viewport);
         }
 
+        console.log($location.url());
         if ( $location.url() !== '/' ) {
           this.template = 'templates/' + $location.url() + '.html';
         } else {
