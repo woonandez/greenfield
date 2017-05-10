@@ -25,6 +25,7 @@ angular.module('app')
           itineraryId: 1
         }
       }).then((res) => {
+        console.log(res, 'responseobj');
         callback(res);
       })
     }
