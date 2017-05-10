@@ -9,7 +9,12 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'currentItineraryList',
       bindToController: true,
-      controller: function() {},
+      controller: function() {
+        console.log(this);
+      },
+      link: function() {
+        console.log(this, 'link');
+      }
       templateUrl: '../templates/currentItineraryList.html'
     }
   });
