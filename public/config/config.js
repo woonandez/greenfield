@@ -19,4 +19,5 @@ angular.module('app', ['auth0.lock', 'angular-jwt', 'ui.router', 'ngMap'])
     });
 
 
+
   });
