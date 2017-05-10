@@ -24,8 +24,8 @@ angular.module('app')
         params: {
           itineraryId: 1
         }
-      }).then((data) => {
-        callback(data);
+      }).then((res) => {
+        callback(res);
       })
     }
   });
