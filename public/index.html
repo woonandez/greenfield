@@ -30,41 +30,8 @@
         <p>Thank you for logging in!</p>
       </div>
 
-      <div ng-controller="appCtrl">
-      <button ng-click="activate()">Test</button>
+      <app ng-if="isAuthenticated"></app>
 
-        <search search-location="searchLocation"></search>
-
-          <div class="mapContainer">
-            <ng-map
-              ng-if="isAuthenticated"
-              center="{{mapCenter}}"
-              zoom="13"
-              map-type-id="MapTypeId.{{mapType}}">
-              <marker
-                draggable="true"
-                on-dragend="getCurrentLocation()"
-                animation="DROP"
-                position="{{mapCenter}}">
-              </marker>
-
-              <marker
-                ng-repeat="icon in markers"
-                position="{{ icon.location }}">
-              </marker>
-            </ng-map>
-          </div>
-
-        <div class="listContainer">
-          <current-itinerary-list
-            locations="markers"
-            viewport="viewport"
-            add-marker="addMarker">
-          </current-itinerary-list>
-          <app-dir></app-dir>
-        </div>
-
-      </div>
     </div>
 
     <script src="config/config.js"></script>
