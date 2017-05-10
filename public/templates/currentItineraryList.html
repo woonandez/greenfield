@@ -2,7 +2,7 @@
   <div class=currentItineraryList>
 
   <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
-    <input ng-model="place">Your Destination</input>
+    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}">Your Destination</input>
     <input ng-model="date" type="date">When will you be there?</input>
     <input ng-model="time" type="time">What time will you be there?</input>
     <textarea ng-model="desc">Give us a brief description of what you will be doing that day.</textarea>
