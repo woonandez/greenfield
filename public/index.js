@@ -1,10 +1,7 @@
 angular.module('app')
-  .directive('app', function(authService) {
-    if ( localStorage.getItem('id_token') ) {
-      authService.authenticateOnRefresh();
-    } else {
-      authService.login();
-    }
+  .directive('app', function() {
+
+
     return {
       scope: {
         authenticated: '<',
@@ -13,8 +10,12 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'app',
       bindToController: true,
-      controller: function($location, appServices, NgMap, $window) {
-
+      controller: function($location, appServices, NgMap, $window, authService) {
+        if ( localStorage.getItem('id_token') ) {
+          authService.authenticateOnRefresh();
+        } else {
+          authService.login();
+        }
 
         this.markers = [];
         this.mapCenter = 'San Francisco';
