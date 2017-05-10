@@ -28,16 +28,24 @@ angular.module('app')
                                 {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
 
         this.switch = (viewport) => {
-          this.template = 'templates/' + viewport + '.html';
+          this.template = '/templates/' + viewport + '.html';
           $location.path(viewport);
         }
 
-        console.log($location.url());
+
+        // console.log($location.url());
+        // console.log($location.path());
         if ( $location.url() !== '/' ) {
-          this.template = 'templates/' + $location.url() + '.html';
+          this.template = '/templates' + $location.path() + '.html';
         } else {
+          // this.template = '/templates/current.html';
+          // $location.path(current);
           this.switch('current');
         }
+
+        // console.log($location.path());
+        // console.log(this.template);
+
 
 
         this.getCurrentLocation = (e) => {
