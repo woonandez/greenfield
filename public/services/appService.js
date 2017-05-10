@@ -30,7 +30,7 @@ angular.module('app')
     }
 
     this.getLocation = function(object, callback) {
-      http({
+      $http({
         method: 'POST',
         url: '/location_by_coords',
         headers: { 'Content-Type': 'application/json'},
