@@ -2,6 +2,7 @@ body {
   font-family: "Noto Sans", sans-serif;
   margin: 0;
   background-color: #78a3ed;
+  /*background-color: black;*/
 }
 
 .searchContainer {
@@ -77,6 +78,8 @@ body {
   background-color: #a4c17d;
   margin: 30px;
   border-radius: 10pt;
+/*  border-style: outset;
+  border-color: #e5de89;*/
 }
 
 .currentItineraryEntry {
@@ -110,7 +113,8 @@ body {
 
 ng-map {
   height: 400px;
-  box-shadow: 0px 6px 6px #a4c17d;
+  /*box-shadow: 0px 6px 6px #a4c17d;*/
+  box-shadow: 0px 6px 6px #4b6693;
 }
 
 nav {
@@ -120,7 +124,7 @@ nav {
   flex-wrap: wrap;
   justify-content: space-between;
   background-color: #a4c17d;
-  box-shadow: 0px 3px 3px #86996e;
+  box-shadow: 0px 3px 0px #64774b;
   margin-bottom: 3px;
 }
 
@@ -137,5 +141,6 @@ nav span {
 }
 
 nav div:hover {
+  cursor: default;
   background-color: #86996e;
 }
