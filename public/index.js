@@ -55,11 +55,6 @@ angular.module('app')
           this.getMarkerLocations();
         });
 
-        this.placeChanged = () => {
-          this.place = this.getPlace();
-          this.map.setCenter(this.place.geometry.location);
-        }
-
         this.searchLocation = (newLoc) => {
           this.mapCenter = newLoc;
         }
