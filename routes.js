@@ -37,15 +37,17 @@ app.use(express.static(__dirname + '/public'));
 //   res.redirect('/current');
 // });
 
-app.get('/trip', (req, res) => {
-  console.log(public);
+
+
+app.get('/trip/*', (req, res) => {
+  console.log(req, public, '\n\n');
   res.sendFile(public + 'index.html');
 });
 
-app.get('/trip/*', (req, res) => {
-  console.log(public);
-  res.sendFile(public + 'index.html');
-});
+// app.get('/trip', (req, res) => {
+//   console.log(public);
+//   res.sendFile(public + 'index.html');
+// });
 
 app.get('/itineraries', (req, res) => {
   res.sendFile(public + 'index.html');
@@ -154,6 +156,8 @@ app.post('/location_by_coords', (req, res) => {
 
 
 
+
+
 app.post('/submit_itinerary', (req, res) => {
   // req.body === {
   //   name: 'trip name',
@@ -168,10 +172,13 @@ app.post('/submit_itinerary', (req, res) => {
   // console.log(req.body.userID)
 
   // input(name, start, end, userId, callback)
-  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function() {
-    res.end('itinerary created');
+  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
+    console.log('RESULT', result.dataValues);
+    res.end( JSON.stringify(result.dataValues) );
   });
 });
+
+
 
 
 
@@ -205,6 +212,9 @@ app.get('/locations_for_itinerary', (req, res) => {
     res.end( JSON.stringify(array) );
   });
 });
+
+
+
 
 
 app.get('/itineraries_for_user', (req, res) => {
@@ -263,7 +273,7 @@ app.post('/login', (req, res) => {
 
 app.post('/login', (req, res) => {
   console.log('/login', req.body);
-  // res.end();
+  res.end();
 });
 
 
