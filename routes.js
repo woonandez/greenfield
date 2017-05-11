@@ -37,7 +37,12 @@ app.use(express.static(__dirname + '/public'));
 //   res.redirect('/current');
 // });
 
-app.get('/current', (req, res) => {
+app.get('/trip', (req, res) => {
+  console.log(public);
+  res.sendFile(public + 'index.html');
+});
+
+app.get('/trip/*', (req, res) => {
   console.log(public);
   res.sendFile(public + 'index.html');
 });
