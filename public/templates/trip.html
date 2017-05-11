@@ -16,6 +16,15 @@
         ng-repeat="icon in app.markers"
         position="{{ icon.location }}">
       </marker>
+
+      <directions
+         draggable="true"
+         panel="directions-panel"
+         travel-mode="'DRIVING'"
+         origin="{{ app.start }}"
+         destination="{{ app.end }}">
+      </directions>
+
     </ng-map>
   </div>
 
