@@ -6,7 +6,7 @@ angular.module('app')
         url: '/submit_location',
         headers: { 'Content-Type': 'application/json'},
         data: {
-          itineraryId: 1,
+          itineraryId: object.id,
           text: object.text,
           time: object.time,
           date: object.date
@@ -16,13 +16,13 @@ angular.module('app')
       })
     }
 
-    this.getMarkers = function(param, callback) {
+    this.getMarkers = function(id, callback) {
       $http({
         method: 'GET',
         url: '/locations_for_itinerary',
         headers: {'Content-Type': 'application/x-www-form-urlencoded'},
         params: {
-          itineraryId: 1
+          itineraryId: id
         }
       }).then((res) => {
         callback(res);
