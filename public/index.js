@@ -17,10 +17,10 @@ angular.module('app')
           authService.login();
         }
 
+        this.itineraries = [];
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
-
 
         // Placeholder data
         this.userItineraries = [{'id': 1, 'name': 'Europe Vacation', date: 'September 2017'},
@@ -28,26 +28,30 @@ angular.module('app')
                                 {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
 
         this.switch = (viewport) => {
-          this.template = 'templates/' + viewport + '.html';
+          this.template = '/templates/' + viewport + '.html';
           $location.path(viewport);
         }
 
-        console.log($location.url());
         if ( $location.url() !== '/' ) {
-          this.template = 'templates/' + $location.url() + '.html';
+          this.template = '/templates' + $location.path() + '.html';
         } else {
-          this.switch('current');
+          this.switch('trip');
         }
-
 
         this.getCurrentLocation = (e) => {
           var lat = e.latLng.lat();
           var long = e.latLng.lng();
-          this.mapCenter = [lat, long];
+          var latLong = {
+            latitude: lat,
+            longitude: long,
+          }
+          appServices.getLocation(latLong, (res) => {
+            this.mapCenter = res.data;
+          });
         }
 
-        NgMap.getMap().then( (map) => {
-          console.log(this.markers, 'markers');
+        NgMap.getMap().then((map) => {
+          this.map = map;
           map.getCenter();
           this.getMarkerLocations();
         });
@@ -63,16 +67,34 @@ angular.module('app')
         }
 
         this.addMarker = (place, date, time, desc) => {
-          console.log('ran');
+          var destination = this.mapCenter === place ? place : this.mapCenter;
           var reqObj = {
-            text: place,
+            text: destination,
             date: date,
             time: time,
             desc: desc
           }
 
           appServices.sendCoords(reqObj, (res) => {
-            console.log(res, 'response obj');
+            $window.location.reload();
+          });
+        }
+
+        // Get user itineraries for itineraries view
+        appServices.getItineraries( (res) => {
+          for ( var itinerary of res.data ) {
+            this.itineraries.push(itinerary);
+          }
+        });
+
+        // Create an itinerary for the user
+        this.addItinerary = (name, start, end) => {
+          var submissionData = {
+            name: name,
+            start: start,
+            end: end
+          };
+          appServices.submitItinerary(submissionData, (res) => {
             $window.location.reload();
           });
         }

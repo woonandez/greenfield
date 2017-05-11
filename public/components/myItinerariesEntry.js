@@ -3,7 +3,6 @@ angular.module('app')
     return {
       scope: {
         itinerary: '<'
-        changeCurrentItinerary: '<'
       },
       restrict: 'E',
       controllerAs: 'myItinerariesEntry',

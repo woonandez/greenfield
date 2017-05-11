@@ -3,7 +3,8 @@ angular.module('app')
     return {
       scope: {
         locations: '<',
-        addMarker: '<'
+        addMarker: '<',
+        mapCenter: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryList',

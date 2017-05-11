@@ -2,7 +2,8 @@ angular.module('app')
   .directive('search', function() {
     return {
       scope: {
-        searchLocation: '<'
+        searchLocation: '<',
+        placeChanged: '<'
       },
       restrict: 'E',
       controllerAs: 'ctrl',
