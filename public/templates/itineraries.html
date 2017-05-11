@@ -1,3 +1,32 @@
-<div class="itineraries">
+<!-- <div class="itineraries">
+
+</div> -->
+
+<div class="currentItineraryList">
+
+  <div class="entryListContainer">
+    <div id="currentItineraryEntryTitles" class="currentItineraryEntry">
+      <p>Itinerary</p>
+      <p>Start Date</p>
+      <p>End Date</p>
+      <p>Remove</p>
+    </div>
+
+    <my-itineraries-entry
+    ng-repeat="itinerary in myItinerariesList.userItineraries track by $index"
+    itinerary="myItinerariesList.userItineraries[$index]"
+    changeCurrentItinerary="myItinerariesList.changeCurrentItinerary"
+  ></my-itineraries-entry>
+
+  </div>
+
+  <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
+    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}"></input>
+    <input ng-model="date" type="date"></input>
+    <input ng-model="time" type="time"></input>
+    <input id="formSubmit" type="submit" value="Submit"></input>
+  </form>
+
+
 
 </div>
