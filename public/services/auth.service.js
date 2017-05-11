@@ -1,5 +1,5 @@
 angular.module('app')
-  .service('authService', function(lock, authManager, $http) {
+  .service('authService', function(lock, authManager, $http, $window) {
     this.login = () => { lock.show(); };
 
     this.registerAuthenticationListener = () => {
@@ -34,6 +34,7 @@ angular.module('app')
     this.logout = () => {
       localStorage.removeItem('id_token');
       authManager.unauthenticate();
+      $window.location.reload();
       lock.show();
     };
   });
