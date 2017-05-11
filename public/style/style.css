@@ -93,6 +93,10 @@ body {
   width: 100%;
 }
 
+.currentItineraryEntry img {
+  width: auto;
+}
+
 #currentItineraryEntryTitles p:last-child {
   width: auto;
 }
