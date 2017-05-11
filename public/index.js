@@ -25,6 +25,8 @@ angular.module('app')
         this.switch = (viewport, id) => {
           if (id) {
             this.currentItineraryId = id;
+            this.markers = [];
+            this.getMarkerLocations();
             $location.path(viewport + '/' + id);
           } else {
             $location.path(viewport);
@@ -32,7 +34,6 @@ angular.module('app')
 
           this.template = '/templates/' + viewport + '.html';
         }
-
 
 
         if ( $location.path() !== '/' ) {
@@ -46,8 +47,6 @@ angular.module('app')
         } else {
           this.switch('itineraries');
         }
-
-
 
 
         this.getCurrentLocation = (e) => {
@@ -75,9 +74,12 @@ angular.module('app')
         this.getMarkerLocations = () => {
           appServices.getMarkers(this.currentItineraryId, ({data}) => {
             data.forEach(d => this.markers.push(d));
-            this.start = this.markers[0].location;
-            this.end = this.markers[this.markers.length - 1].location;
+            if (this.markers.length > 1) {
+              this.start = this.markers[0].location;
+              this.end = this.markers[this.markers.length - 1].location;
+            }
           });
+
         }
 
         this.addMarker = (place, date, time, desc) => {
@@ -88,7 +90,6 @@ angular.module('app')
             date: date,
             time: time
           }
-          console.log(reqObj);
 
           appServices.sendCoords(reqObj, (res) => {
             this.markers.push(res.data);
