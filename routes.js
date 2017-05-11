@@ -33,21 +33,23 @@ app.set('jwtTokenSecret', '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAU
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
-// app.get('/', (req, res) => {
-//   res.redirect('/current');
-// });
-
-
-
-app.get('/trip/*', (req, res) => {
-  console.log(req, public, '\n\n');
-  res.sendFile(public + 'index.html');
+app.get('/', (req, res) => {
+  console.log('/m/m/mm/m//m')
+  res.redirect('/itineraries');
 });
 
-// app.get('/trip', (req, res) => {
-//   console.log(public);
-//   res.sendFile(public + 'index.html');
-// });
+
+app.get('/trip', (req, res) => {
+  console.log('Inside trip');
+  // console.log(req, public);
+  res.redirect('/itineraries');
+});
+
+
+app.get('/trip/:id', (req, res) => {
+  // console.log('Inside trip id: ', req.params.id);
+  res.sendFile(public + 'index.html');
+});
 
 app.get('/itineraries', (req, res) => {
   res.sendFile(public + 'index.html');
@@ -68,7 +70,7 @@ app.post('/submit_location', (req, res) => {
   // };
 
 
-  // console.log(process.env);
+  // console.log('');
 
 
   var propertiesObj = {
@@ -251,10 +253,11 @@ app.post('/login', (req, res) => {
   //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
   // }
 
-  // console.log('\nUSERID', req.body.user_id);
+  console.log('\nUSERID', req.body.user_id);
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
   console.log(decoded.sub);
+  res.end();
 
   // db.getUserItineraries(req.body.user_id, (result) => {
 
@@ -271,10 +274,10 @@ app.post('/login', (req, res) => {
 });
 
 
-app.post('/login', (req, res) => {
-  console.log('/login', req.body);
-  res.end();
-});
+// app.post('/login', (req, res) => {
+//   console.log('/login', req.body);
+//   res.end();
+// });
 
 
 
@@ -286,6 +289,7 @@ app.post('/signup', (req, res) => {
 
 
 app.get('*', (req, res) => {
+  console.log('all: *');
   res.redirect('/itineraries');
 });
 

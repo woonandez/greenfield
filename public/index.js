@@ -34,19 +34,24 @@ angular.module('app')
           this.template = '/templates/' + viewport + '.html';
         }
 
+
+
         if ( $location.path() !== '/' ) {
-          console.log($location.path().match(/\d+/));
+          // console.log($location.path().match(/\d+/));
           if ( $location.path().match(/\d+/) ) {
-            // console.log('In here', $location.path().slice(0, 5));
+            console.log('In here', $location.path());
             this.template = '/templates' + $location.path().slice(0, 5) + '.html';
           } else {
             console.log('In else');
             this.template = '/templates' + $location.path() + '.html';
           }
-          console.log(this.template);
+          // console.log(this.template);
         } else {
-          this.switch('trip');
+          this.switch('itineraries');
         }
+
+
+
 
         this.getCurrentLocation = (e) => {
           var lat = e.latLng.lat();
@@ -84,6 +89,7 @@ angular.module('app')
             date: date,
             time: time
           }
+          console.log(reqObj);
 
           appServices.sendCoords(reqObj, (res) => {
             $window.location.reload();
@@ -109,6 +115,6 @@ angular.module('app')
           });
         }
       },
-      templateUrl: './templates/app.html'
+      templateUrl: '/templates/app.html'
     }
   });
