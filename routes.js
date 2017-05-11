@@ -157,16 +157,15 @@ app.post('/submit_itinerary', (req, res) => {
   //   userID: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
   // }
 
+  var decoded = jwt.decode( req.body.userID, app.get('jwtTokenSecret'));
+  console.log("DECODED", decoded.sub);
 
-
+  // console.log(req.body.userID)
 
   // input(name, start, end, userId, callback)
-  db.addItinerary(req.body.name, req.body.start, req.body.end, req.body.userId, function() {
+  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function() {
     res.end('itinerary created');
   });
-
-
-
 });
 
 
@@ -203,6 +202,33 @@ app.get('/locations_for_itinerary', (req, res) => {
 });
 
 
+app.get('/itineraries_for_user', (req, res) => {
+  // req.query === {
+  //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
+  // }
+
+  console.log('query: ', req.query);
+
+  var decoded = jwt.decode( req.query.user_id, app.get('jwtTokenSecret'));
+  console.log(decoded);
+
+  db.getUserItineraries(decoded.sub, (result) => {
+    var array = [];
+    if (result.length) {
+      for (var itinerary of result) {
+        array.push({
+          id: itinerary.id,
+          name: itinerary.name,
+          startDate: itinerary.start,
+          endDate: itinerary.end
+          // locations: itinerary.locations
+        });
+      }
+    }
+    res.end( JSON.stringify(array) );
+  });
+});
+
 
 
 app.post('/login', (req, res) => {
@@ -210,23 +236,17 @@ app.post('/login', (req, res) => {
   //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
   // }
 
-  // console.log('/login', req.body);
-  console.log('\nUSERID', req.body.user_id);
-  // console.log(process.env);
+  // console.log('\nUSERID', req.body.user_id);
 
-  // var userID = req.body.user_id.split('.');
-  // userID.pop();
-  // userID = userID.join('.');
-  // console.log('USERID', userID);
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log(decoded);
+  console.log(decoded.sub);
 
   db.getUserItineraries(req.body.user_id, (result) => {
 
     console.log('USERid: ', req.body.user_id);
     if (!result.length) {
-      db.addItinerary("default", "start", "end", req.body.user_id, function(result) {
-        console.log("result: ", result.dataValues.id);
+      db.addItinerary("default", "start", "end", decoded.sub, function(result) {
+        // console.log("result: ", result.dataValues.id);
         res.end( JSON.stringify(result.dataValues.id) );
       });
     } else {
