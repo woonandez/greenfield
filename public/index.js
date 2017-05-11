@@ -1,7 +1,6 @@
 angular.module('app')
   .directive('app', function() {
 
-
     return {
       scope: {
         authenticated: '<',
@@ -104,8 +103,8 @@ angular.module('app')
             start: start,
             end: end
           };
-          appServices.submitItinerary(submissionData, (res) => {
-            $window.location.reload();
+          appServices.submitItinerary( (res) => {
+            console.log(res);
           });
         }
       },
