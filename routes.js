@@ -271,7 +271,7 @@ app.post('/signup', (req, res) => {
 
 
 app.get('*', (req, res) => {
-  res.redirect('/current');
+  res.redirect('/trip');
 });
 
 
