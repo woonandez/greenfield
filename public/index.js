@@ -65,19 +65,15 @@ angular.module('app')
             console.log(this.markers);
           });
         }
-        //  $rootScope.wayPoints = [
-        //   {location: {lat:44.32384807250689, lng: -78.079833984375}, stopover: true},
-        //   {location: {lat:44.55916341529184, lng: -76.17919921875}, stopover: true},
-        // ];
+
         this.addMarker = (place, date, time, desc) => {
-          var destination = this.mapCenter === place ? place : this.mapCenter;
+          var destination = place === undefined ? this.mapCenter : place;
           var reqObj = {
             text: destination,
             date: date,
             time: time,
             desc: desc
           }
-
           appServices.sendCoords(reqObj, (res) => {
             $window.location.reload();
           });
