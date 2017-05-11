@@ -1,19 +1,29 @@
-<br></br>
-  <div class=currentItineraryList>
+<!-- <br></br> -->
+<div class="currentItineraryList">
 
-  <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
-    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}">Your Destination</input>
-    <input ng-model="date" type="date">When will you be there?</input>
-    <input ng-model="time" type="time">What time will you be there?</input>
-    <textarea ng-model="desc">Give us a brief description of what you will be doing that day.</textarea>
-    <input type="submit" value="Submit"></input>
-  </form>
-
-  <br></br>
   <div class="entryListContainer">
+    <div id="currentItineraryEntryTitles" class="currentItineraryEntry">
+      <p>Location</p>
+      <p>Date</p>
+      <p>Time</p>
+      <p>Remove</p>
+    </div>
     <current-itinerary-entry
       ng-repeat="place in currentItineraryList.locations track by $index"
       place="currentItineraryList.locations[$index]">
     </current-itinerary-entry>
+
   </div>
+
+  <!-- <br></br> -->
+
+  <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
+    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}"></input>
+    <input ng-model="date" type="date"></input>
+    <input ng-model="time" type="time"></input>
+    <input id="formSubmit" type="submit" value="Submit"></input>
+  </form>
+
+
+
 </div>
