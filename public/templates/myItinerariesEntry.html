@@ -1,9 +1,6 @@
-<div class="myItinerary">
-
-  <span>{{ myItinerariesEntry.itinerary.name }}</span>
-  <span>{{ myItinerariesEntry.itinerary.date }}</span>
-  <button
-    ng-click="myItinerariesEntry.changeCurrentItinerary(myItinerariesEntry.itinerary.id)"
-  >Load!</button>
-
+<div class="entry">
+  <p>{{ myItinerariesEntry.itinerary.name }}</p>
+  <p>{{ myItinerariesEntry.itinerary.start }}</p>
+  <p>{{ myItinerariesEntry.itinerary.end }}</p>
+  <img class="redX" src="/img/red-x-md.png">
 </div>
