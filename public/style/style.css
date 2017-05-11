@@ -89,6 +89,14 @@ body {
   margin-right: 20px;
 }
 
+.currentItineraryEntry * {
+  width: 100%;
+}
+
+#currentItineraryEntryTitles p:last-child {
+  width: auto;
+}
+
 .redX {
   width: 30px;
   height: 30px;
