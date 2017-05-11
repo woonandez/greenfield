@@ -62,7 +62,10 @@ angular.module('app')
         this.getMarkerLocations = () => {
           appServices.getMarkers('param', ({data}) => {
             data.forEach(d => this.markers.push(d));
+            this.start = this.markers[0].location;
+            this.end = this.markers[this.markers.length - 1].location;
             console.log(this.markers);
+            console.log('origin', this.start, 'dest', this.end);
           });
         }
 

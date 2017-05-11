@@ -21,9 +21,8 @@
          draggable="true"
          panel="directions-panel"
          travel-mode="'DRIVING'"
-         waypoints="[{location:'san francisco', stopover:true}]"
-         origin="Los Angeles"
-         destination="San Diego">
+         origin="{{ app.start }}"
+         destination="{{ app.end }}">
      </directions>
     </ng-map>
   </div>
