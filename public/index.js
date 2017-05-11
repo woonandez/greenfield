@@ -95,7 +95,7 @@ angular.module('app')
             end: end
           };
           appServices.submitItinerary(submissionData, (res) => {
-            console.log(res);
+            $window.location.reload();
           });
         }
       },
