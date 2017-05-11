@@ -94,7 +94,6 @@ angular.module('app')
             start: start,
             end: end
           };
-          console.log(submissionData);
           appServices.submitItinerary(submissionData, (res) => {
             console.log(res);
           });
