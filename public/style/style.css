@@ -82,7 +82,7 @@ body {
   border-color: #e5de89;*/
 }
 
-.currentItineraryEntry {
+.entry {
 
   display: flex;
   justify-content: space-between;
@@ -92,11 +92,11 @@ body {
   margin-right: 20px;
 }
 
-.currentItineraryEntry * {
+.entry * {
   width: 100%;
 }
 
-.currentItineraryEntry img {
+.entry img {
   width: auto;
 }
 
