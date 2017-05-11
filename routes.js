@@ -137,7 +137,7 @@ app.post('/location_by_coords', (req, res) => {
       res.end(err);
     } else {
       var results = JSON.parse( body ).results[0];
-      res.end( JSON.stringify(results.formatted_address) );
+      res.end(results.formatted_address);
     }
   });
 });
