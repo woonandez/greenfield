@@ -35,7 +35,7 @@ angular.module('app')
         if ( $location.url() !== '/' ) {
           this.template = '/templates' + $location.path() + '.html';
         } else {
-          this.switch('current');
+          this.switch('trip');
         }
 
         this.getCurrentLocation = (e) => {
