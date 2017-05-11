@@ -219,8 +219,8 @@ app.get('/itineraries_for_user', (req, res) => {
         array.push({
           id: itinerary.id,
           name: itinerary.name,
-          startDate: itinerary.start,
-          endDate: itinerary.end
+          start: itinerary.start,
+          end: itinerary.end
           // locations: itinerary.locations
         });
       }
@@ -241,18 +241,18 @@ app.post('/login', (req, res) => {
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
   console.log(decoded.sub);
 
-  db.getUserItineraries(req.body.user_id, (result) => {
+  // db.getUserItineraries(req.body.user_id, (result) => {
 
-    console.log('USERid: ', req.body.user_id);
-    if (!result.length) {
-      db.addItinerary("default", "start", "end", decoded.sub, function(result) {
-        // console.log("result: ", result.dataValues.id);
-        res.end( JSON.stringify(result.dataValues.id) );
-      });
-    } else {
-      res.end( JSON.stringify(result[0].dataValues.id) );
-    }
-  });
+  //   console.log('USERid: ', req.body.user_id);
+  //   if (!result.length) {
+  //     db.addItinerary("default", "start", "end", decoded.sub, function(result) {
+  //       // console.log("result: ", result.dataValues.id);
+  //       res.end( JSON.stringify(result.dataValues.id) );
+  //     });
+  //   } else {
+  //     res.end( JSON.stringify(result[0].dataValues.id) );
+  //   }
+  // });
 });
 
 
