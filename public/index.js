@@ -35,9 +35,9 @@ angular.module('app')
         }
 
         if ( $location.path() !== '/' ) {
-          console.log($location.path().match(/\d+/))
+          console.log($location.path().match(/\d+/));
           if ( $location.path().match(/\d+/) ) {
-            console.log('In here');
+            // console.log('In here', $location.path().slice(0, 5));
             this.template = '/templates' + $location.path().slice(0, 5) + '.html';
           } else {
             console.log('In else');
