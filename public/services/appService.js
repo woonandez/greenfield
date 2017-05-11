@@ -42,4 +42,31 @@ angular.module('app')
         callback(res);
       });
     }
+
+    this.getItineraries = function(callback) {
+      var id = localStorage.getItem('id_token');
+      $http({
+        method: 'GET',
+        url: '/itineraries_for_user',
+        headers: { 'Content-Type': 'application/json' },
+        params: {
+          user_id: id
+        }
+      }).then((res) => {
+        callback(res);
+      });
+    }
+
+    this.submitItinerary = function({}, callback) {
+      $http({
+        method: 'POST',
+        url: '/submit_itinerary',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+
+        }
+      }).then((res) => {
+        callback(res);
+      });
+    }
   });

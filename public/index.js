@@ -78,6 +78,15 @@ angular.module('app')
             $window.location.reload();
           });
         }
+
+        // Get user itineraries for itineraries view
+        appServices.getItineraries( (res) => {
+          for ( var itinerary of res ) {
+            console.log(typeof(itinerary));
+          }
+          this.itineraries = [];
+        });
+
       },
       templateUrl: './templates/app.html'
     }
