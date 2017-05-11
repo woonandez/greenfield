@@ -57,13 +57,17 @@ angular.module('app')
       });
     }
 
-    this.submitItinerary = function({}, callback) {
+    this.submitItinerary = function({name, start, end}, callback) {
+      var id = localStorage.getItem('id_token');
       $http({
         method: 'POST',
         url: '/submit_itinerary',
         headers: { 'Content-Type': 'application/json' },
         data: {
-
+          user_id: id,
+          name: name,
+          start: start,
+          end: end,
         }
       }).then((res) => {
         callback(res);

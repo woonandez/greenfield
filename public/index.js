@@ -17,6 +17,7 @@ angular.module('app')
           authService.login();
         }
 
+        this.itineraries = [];
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
@@ -81,12 +82,23 @@ angular.module('app')
 
         // Get user itineraries for itineraries view
         appServices.getItineraries( (res) => {
-          for ( var itinerary of res ) {
-            console.log(typeof(itinerary));
+          for ( var itinerary of res.data ) {
+            this.itineraries.push(itinerary);
           }
-          this.itineraries = [];
         });
 
+        // Create an itinerary for the user
+        this.addItinerary = (name, start, end) => {
+          var submissionData = {
+            name: name,
+            start: start,
+            end: end
+          };
+          console.log(submissionData);
+          appServices.submitItinerary(submissionData, (res) => {
+            console.log(res);
+          });
+        }
       },
       templateUrl: './templates/app.html'
     }

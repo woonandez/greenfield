@@ -13,20 +13,16 @@
     </div>
 
     <my-itineraries-entry
-    ng-repeat="itinerary in myItinerariesList.userItineraries track by $index"
-    itinerary="myItinerariesList.userItineraries[$index]"
-    changeCurrentItinerary="myItinerariesList.changeCurrentItinerary"
-  ></my-itineraries-entry>
+      ng-repeat="itinerary in app.itineraries track by $index"
+      itinerary="app.itineraries[$index]"
+    ></my-itineraries-entry>
 
   </div>
 
-  <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
-    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}"></input>
-    <input ng-model="date" type="date"></input>
-    <input ng-model="time" type="time"></input>
+  <form class="listForm" ng-submit="app.addItinerary(name, start, end)">
+    <input ng-model="name" type="text" placeholder="Itinerary Name"></input>
+    <input ng-model="start" type="date"></input>
+    <input ng-model="end" type="date"></input>
     <input id="formSubmit" type="submit" value="Submit"></input>
   </form>
-
-
-
 </div>
