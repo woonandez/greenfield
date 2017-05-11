@@ -17,7 +17,7 @@ angular.module('app')
           authService.login();
         }
 
-        this.currentItineraryId;
+        this.currentItineraryId = +$location.path().slice(6);
         this.itineraries = [];
         this.markers = [];
         this.mapCenter = 'San Francisco';
@@ -34,8 +34,16 @@ angular.module('app')
           this.template = '/templates/' + viewport + '.html';
         }
 
-        if ( $location.url() !== '/' ) {
-          this.template = '/templates' + $location.path() + '.html';
+        if ( $location.path() !== '/' ) {
+          console.log($location.path().match(/\d+/))
+          if ( $location.path().match(/\d+/) ) {
+            console.log('In here');
+            this.template = '/templates' + $location.path().slice(0, 5) + '.html';
+          } else {
+            console.log('In else');
+            this.template = '/templates' + $location.path() + '.html';
+          }
+          console.log(this.template);
         } else {
           this.switch('trip');
         }
