@@ -1,10 +1,9 @@
-<div class="searchContainer">
+<span class="searchContainer">
   <input
     places-auto-complete
-    size=80
     types="['establishment']"
     ng-model="searchVal"
     on-place-changed="ctrl.placeChanged()"
     >
   <button ng-click="ctrl.searchLocation(searchVal)">Search</button>
-</div>
+</span>

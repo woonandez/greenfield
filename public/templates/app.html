@@ -5,9 +5,14 @@
     <span>
       <div ng-click="app.switch('current')">Current Itinerary</div>
       <div ng-click="app.switch('itineraries')">Itineraries</div>
+
     </span>
     <span>
-      <div class="btn btn-primary" ng-click="app.service.logout()">Log Out</div>
+    <search
+    search-location="app.searchLocation"
+    place-changed="app.placeChanged">
+  </search>
+      <div class="btn btn-primary" ng-click="app.service.logout()">Logout</div>
     </span>
   </nav>
 

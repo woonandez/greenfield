@@ -211,7 +211,7 @@ app.post('/login', (req, res) => {
   // }
 
   // console.log('/login', req.body);
-  console.log('USERID', req.body.user_id);
+  console.log('\nUSERID', req.body.user_id);
   // console.log(process.env);
 
   // var userID = req.body.user_id.split('.');
@@ -219,7 +219,7 @@ app.post('/login', (req, res) => {
   // userID = userID.join('.');
   // console.log('USERID', userID);
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log(decoded.sub);
+  console.log(decoded);
 
   db.getUserItineraries(req.body.user_id, (result) => {
 
