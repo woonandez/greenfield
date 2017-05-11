@@ -16,6 +16,15 @@
         ng-repeat="icon in app.markers"
         position="{{ icon.location }}">
       </marker>
+
+        <directions
+         draggable="true"
+         panel="directions-panel"
+         travel-mode="'DRIVING'"
+         waypoints="[{location:'san francisco', stopover:true}]"
+         origin="Los Angeles"
+         destination="San Diego">
+     </directions>
     </ng-map>
   </div>
 <!--
@@ -23,7 +32,6 @@
     search-location="app.searchLocation"
     place-changed="app.placeChanged">
   </search> -->
-
   <div class="listContainer">
     <current-itinerary-list
       locations="app.markers"
