@@ -17,19 +17,21 @@ angular.module('app')
           authService.login();
         }
 
+        this.currentItineraryId;
         this.itineraries = [];
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
 
-        // Placeholder data
-        this.userItineraries = [{'id': 1, 'name': 'Europe Vacation', date: 'September 2017'},
-                                {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
-                                {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
+        this.switch = (viewport, id) => {
+          if (id) {
+            this.currentItineraryId = id;
+            $location.path(viewport + '/' + id);
+          } else {
+            $location.path(viewport);
+          }
 
-        this.switch = (viewport) => {
           this.template = '/templates/' + viewport + '.html';
-          $location.path(viewport);
         }
 
         if ( $location.url() !== '/' ) {
@@ -61,7 +63,7 @@ angular.module('app')
         }
 
         this.getMarkerLocations = () => {
-          appServices.getMarkers('param', ({data}) => {
+          appServices.getMarkers(this.currentItineraryId, ({data}) => {
             data.forEach(d => this.markers.push(d));
           });
         }
@@ -69,10 +71,10 @@ angular.module('app')
         this.addMarker = (place, date, time, desc) => {
           var destination = this.mapCenter === place ? place : this.mapCenter;
           var reqObj = {
+            id: this.currentItineraryId,
             text: destination,
             date: date,
-            time: time,
-            desc: desc
+            time: time
           }
 
           appServices.sendCoords(reqObj, (res) => {

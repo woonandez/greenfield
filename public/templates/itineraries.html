@@ -10,6 +10,7 @@
 
     <my-itineraries-entry
       ng-repeat="itinerary in app.itineraries track by $index"
+      app-click="app.switch"
       itinerary="app.itineraries[$index]"
     ></my-itineraries-entry>
 
