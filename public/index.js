@@ -36,13 +36,11 @@ angular.module('app')
         if ( $location.path() !== '/' ) {
           console.log($location.path().match(/\d+/));
           if ( $location.path().match(/\d+/) ) {
-            // console.log('In here', $location.path().slice(0, 5));
             this.template = '/templates' + $location.path().slice(0, 5) + '.html';
           } else {
             console.log('In else');
             this.template = '/templates' + $location.path() + '.html';
           }
-          console.log(this.template);
         } else {
           this.switch('trip');
         }
@@ -72,11 +70,13 @@ angular.module('app')
         this.getMarkerLocations = () => {
           appServices.getMarkers(this.currentItineraryId, ({data}) => {
             data.forEach(d => this.markers.push(d));
+            this.start = this.markers[0].location;
+            this.end = this.markers[this.markers.length - 1].location;
           });
         }
 
         this.addMarker = (place, date, time, desc) => {
-          var destination = this.mapCenter === place ? place : this.mapCenter;
+          var destination = place === undefined ? this.mapCenter : place;
           var reqObj = {
             id: this.currentItineraryId,
             text: destination,
@@ -85,7 +85,7 @@ angular.module('app')
           }
 
           appServices.sendCoords(reqObj, (res) => {
-            $window.location.reload();
+            this.markers.push(res.data);
           });
         }
 
@@ -103,8 +103,8 @@ angular.module('app')
             start: start,
             end: end
           };
-          appServices.submitItinerary( (res) => {
-            console.log(res);
+          appServices.submitItinerary(submissionData, (res) => {
+            this.itineraries.push(res.data);
           });
         }
       },
