@@ -117,10 +117,9 @@ angular.module('app')
         }
 
         this.formatDate = (date) => {
-          var format = date;
-          var short = format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
-
-          console.log(short);
+          var length = date.length;
+          var format = date.split('').splice(0, 10).join('');
+          return format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
         }
       },
       templateUrl: '/templates/app.html'

@@ -8,9 +8,7 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
-      controller: function($scope) {
-        console.log($scope);
-      },
+      controller: function() {},
       templateUrl: '../templates/currentItineraryEntry.html'
     }
   });
