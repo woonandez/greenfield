@@ -9,6 +9,6 @@ angular.module('app')
       controllerAs: 'ctrl',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/search.html'
+      templateUrl: '/templates/search.html'
     }
   })

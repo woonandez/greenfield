@@ -9,6 +9,6 @@ angular.module('app')
       controllerAs: 'myItinerariesList',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/myItinerariesList.html'
+      templateUrl: '/templates/myItinerariesList.html'
     }
   });

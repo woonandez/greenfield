@@ -8,6 +8,6 @@ angular.module('app')
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/currentItineraryEntry.html'
+      templateUrl: '/templates/currentItineraryEntry.html'
     }
   });
