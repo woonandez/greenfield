@@ -79,15 +79,41 @@ var getLocationsEvents = function(locationId, callback) {
   });
 }
 
+var removeEvents = function(locationsId) {
+  model.events.destroy({
+    where: {
+      id_locations: locationsId
+    }
+  })
+}
+var removeLocations = function(itineraryId) {
+  model.locations.destroy({
+    where: {
+      id_itineraries: itineraryId
+    }
+  })
+}
+
+var removeItinerary = function(itineraryId) {
+  model.itineraries.destroy({
+    where: {
+      id: itineraryId
+    }
+  })
+}
+
 module.exports.addItinerary = addItinerary;
 module.exports.addLocation = addLocation;
 module.exports.getUserItineraries = getUserItineraries;
 module.exports.getitineraryLocations  = getitineraryLocations;
 module.exports.addEvents = addEvents;
 module.exports.getLocationsEvents = getLocationsEvents;
+module.exports.removeEvents = removeEvents;
+module.exports.removeLocations = removeLocations;
+module.exports.removeItinerary = removeItinerary;
 
 // var x = {"name":"trip name","start":"start date","end":"end date","userID":"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"};
-var x = {"name":"trip asdf","start":"start asdf","end":"end asdf","userID":1};
+//var x = {"name":"trip asdf","start":"start asdf","end":"end asdf","userID":1};
 // addItinerary(x.name, x.start, x.end, x.userID, () => console.log('success'));
 
 // addLocation(1, "some location", "june 123rd", "4pm", 123.22, -123.222222222222, () => console.log('success'));
