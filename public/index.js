@@ -115,6 +115,11 @@ angular.module('app')
             this.itineraries.push(res.data);
           });
         }
+
+        this.formatDate = (date) => {
+          console.log(data);
+        }
+
       },
       templateUrl: '/templates/app.html'
     }
