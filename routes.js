@@ -129,10 +129,8 @@ app.post('/delete_location', (req, res) => {
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
 
-  db.removeLocation(req.body.id, function(result) {
-    // console.log('RESULT', result.dataValues);
-    res.end( JSON.stringify(result.dataValues) );
-  });
+  db.removeLocation(req.body.itineraryId, function() {});
+  res.end();
 });
 
 
@@ -145,10 +143,8 @@ app.post('/delete_itinerary', (req, res) => {
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
 
-  db.removeItinerary(req.body.id, function(result) {
-    // console.log('RESULT', result.dataValues);
-    res.end( JSON.stringify(result.dataValues) );
-  });
+  db.removeItinerary(req.body.itineraryId, function() {});
+  res.end();
 });
 
 
