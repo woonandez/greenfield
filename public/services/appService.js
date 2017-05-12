@@ -93,7 +93,7 @@ angular.module('app')
       var id = localStorage.getItem('id_token');
       $http({
         method: 'POST',
-        url: '/',
+        url: '/delete_location',
         headers: { 'Content-Type': 'application/json' },
         data: {
           user_id: id,
