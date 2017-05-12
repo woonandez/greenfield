@@ -2,23 +2,21 @@ body {
   font-family: "Noto Sans", sans-serif;
   margin: 0;
   background-color: #78a3ed;
+  cursor: default;
   /*background-color: black;*/
-}
-
-.searchContainer {
-  margin: -2px;
-  height: 50%;
 }
 
 .searchContainer * {
   border-style: hidden;
   border-radius: 8px;
   margin-right: 5px;
+  height: 20px;
 }
 
 .searchContainer input {
   border-color: #bcd69c;
-  width: 300px;
+  width: 250px;
+  /*width: 100%;*/
 }
 
 .searchContainer button {
@@ -78,8 +76,6 @@ body {
   background-color: #a4c17d;
   margin: 30px;
   border-radius: 10pt;
-/*  border-style: outset;
-  border-color: #e5de89;*/
 }
 
 .entry {
@@ -88,8 +84,8 @@ body {
   justify-content: space-between;
   align-items: center;
   width: calc(100vw - 100px);
-  margin-left: 20px;
-  margin-right: 20px;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .entry * {
@@ -123,28 +119,36 @@ nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   background-color: #a4c17d;
+  /*background-color: grey;*/
   box-shadow: 0px 3px 0px #64774b;
   margin-bottom: 3px;
 }
 
 nav div {
   /*margin: 0;*/
-  padding: 14px;
+  padding: 15px;
 }
 
 nav span:first-child {
-  padding: 15px;
+  /*padding: 15px;*/
+  margin: 15px;
+/*  margin-left: 20px;
+  margin-right: 20px;*/
 }
 
 nav span {
   display: flex;
+  flex-wrap: wrap-reverse;
+  justify-content: space-around;
+  align-items: center;
 }
 
 nav img {
   height: 50px;
-  margin: 0;
+  margin-left: 10px;
+  /*margin: 0;*/
   /*margin-right: 15px;*/
 }
 
@@ -152,3 +156,26 @@ nav div:hover {
   cursor: default;
   background-color: #86996e;
 }
+
+
+
+@media all and (min-width:800px) {
+  nav img {
+    display: show;
+  }
+  nav {
+    justify-content: space-between;
+  }
+}
+@media all and (max-width:800px) {
+  nav img {
+    display: none;
+  }
+  nav {
+    justify-content: space-around;
+  }
+}
+
+
+
+

@@ -8,39 +8,25 @@ var express = require('express'),
 
 var public = path.join(__dirname + '/public/');
 
-
-// var viewPath = path.join(__dirname+'/public/views/');
 var app = express();
 
-// app.use(jwt({
-//   secret: '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu'
-// }));
-
-
-
-
 app.set('jwtTokenSecret', '53u37IF4d6SZZMOzygldjl9E2QOrIoZqzDdTFaH-7DJHoU5BVsOAURgaVADKzMQu');
-
-// Inside of GET route for login:
-
-
-
-
-
-
 
 
 app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
+
+
+
 app.get('/', (req, res) => {
-  console.log('/m/m/mm/m//m')
+  // console.log('/m/m/mm/m//m');
   res.redirect('/itineraries');
 });
 
 
 app.get('/trip', (req, res) => {
-  console.log('Inside trip');
+  // console.log('Inside trip');
   // console.log(req, public);
   res.redirect('/itineraries');
 });
@@ -71,9 +57,7 @@ app.post('/submit_location', (req, res) => {
 
   var propertiesObj = {
     address: req.body.text,
-      key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
-
-
+    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
   };
 
   var params = {
@@ -99,7 +83,7 @@ app.post('/submit_location', (req, res) => {
         results.geometry.location.lng,
       ];
 
-      console.log(args);
+      // console.log(args);
 
       var responseObj = {
         location: results.formatted_address,
@@ -131,11 +115,10 @@ app.post('/submit_itinerary', (req, res) => {
   // }
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log("DECODED", decoded.sub);
+  // console.log("DECODED", decoded.sub);
 
-  // input(name, start, end, userId, callback)
   db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
-    console.log('RESULT', result.dataValues);
+    // console.log('RESULT', result.dataValues);
     res.end( JSON.stringify(result.dataValues) );
   });
 });
@@ -151,11 +134,10 @@ app.post('/delete_location', (req, res) => {
   // }
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log("DECODED", decoded.sub);
+  // console.log("DECODED", decoded.sub);
 
-  // input(name, start, end, userId, callback)
   db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
-    console.log('RESULT', result.dataValues);
+    // console.log('RESULT', result.dataValues);
     res.end( JSON.stringify(result.dataValues) );
   });
 });
@@ -171,11 +153,10 @@ app.post('/delete_itinerary', (req, res) => {
   // }
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log("DECODED", decoded.sub);
+  // console.log("DECODED", decoded.sub);
 
-  // input(name, start, end, userId, callback)
   db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
-    console.log('RESULT', result.dataValues);
+    // console.log('RESULT', result.dataValues);
     res.end( JSON.stringify(result.dataValues) );
   });
 });
@@ -188,15 +169,15 @@ app.post('/delete_itinerary', (req, res) => {
 
 
 app.post('/location_by_coords', (req, res) => {
-
-  // latlng
-  console.log(req.body);
+  // req.body === {
+  //   latitude: 50.988888888,
+  //   longitude: -5.888888888,
+  // }
 
   var propertiesObj = {
     latlng: req.body.latitude + ',' + req.body.longitude,
     key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
   };
-  console.log(propertiesObj);
 
   var params = {
     url: 'https://maps.googleapis.com/maps/api/geocode/json',
@@ -229,25 +210,13 @@ app.get('/locations_for_itinerary', (req, res) => {
   //   itineraryId: 0
   // }
 
-  console.log('query: ', req.query);
-
-
   db.getitineraryLocations(req.query.itineraryId, (result) => {
-    // console.log('result: ', result[0].dataValues.locations);
-
-
-
     var array = [];
-
     if (result.length) {
       for (var instance of result[0].dataValues.locations) {
         array.push(instance.dataValues);
       }
     }
-
-
-    console.log('result: ', array);
-
     res.end( JSON.stringify(array) );
   });
 });
@@ -261,10 +230,7 @@ app.get('/itineraries_for_user', (req, res) => {
   //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
   // }
 
-  console.log('query: ', req.query);
-
   var decoded = jwt.decode( req.query.user_id, app.get('jwtTokenSecret'));
-  console.log(decoded);
 
   db.getUserItineraries(decoded.sub, (result) => {
     var array = [];
@@ -275,7 +241,6 @@ app.get('/itineraries_for_user', (req, res) => {
           name: itinerary.name,
           start: itinerary.start,
           end: itinerary.end
-          // locations: itinerary.locations
         });
       }
     }
@@ -286,47 +251,12 @@ app.get('/itineraries_for_user', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  // req.body === {
-  //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc"
-  // }
-
-  console.log('\nUSERID', req.body.user_id);
-
-  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log(decoded.sub);
   res.end();
-
-  // db.getUserItineraries(req.body.user_id, (result) => {
-
-  //   console.log('USERid: ', req.body.user_id);
-  //   if (!result.length) {
-  //     db.addItinerary("default", "start", "end", decoded.sub, function(result) {
-  //       // console.log("result: ", result.dataValues.id);
-  //       res.end( JSON.stringify(result.dataValues.id) );
-  //     });
-  //   } else {
-  //     res.end( JSON.stringify(result[0].dataValues.id) );
-  //   }
-  // });
-});
-
-
-// app.post('/login', (req, res) => {
-//   console.log('/login', req.body);
-//   res.end();
-// });
-
-
-
-
-app.post('/signup', (req, res) => {
-  console.log('/signup', req.body);
-  // res.end();
 });
 
 
 app.get('*', (req, res) => {
-  console.log('all: *');
+  // console.log('all: *');
   res.redirect('/itineraries');
 });
 

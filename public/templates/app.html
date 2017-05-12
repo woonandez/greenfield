@@ -1,15 +1,10 @@
 <div class="app">
 
   <nav>
-    <span>
-      <img src="/img/piranha.png">
-
-
-    </span>
-
+    <img src="/img/piranha.png">
     <span>
       <!-- <div ng-click="app.switch('itineraries')">Itineraries</div> -->
-      <div>Name of Itinerary</div>
+      <span>{{app.itineraries[app.currentItineraryId - 1].name}}</span>
     </span>
     <span>
       <search
