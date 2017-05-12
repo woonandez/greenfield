@@ -3,7 +3,8 @@ angular.module('app')
     return {
       scope: {
         itinerary: '<',
-        appClick: '<'
+        appClick: '<',
+        removeItinerary: '<'
       },
       restrict: 'E',
       controllerAs: 'myItinerariesEntry',

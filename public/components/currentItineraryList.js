@@ -4,7 +4,8 @@ angular.module('app')
       scope: {
         locations: '<',
         addMarker: '<',
-        mapCenter: '<'
+        mapCenter: '<',
+        removeLocation: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryList',

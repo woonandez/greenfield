@@ -5,5 +5,5 @@
   </p>
   <p>{{ myItinerariesEntry.itinerary.start }}</p>
   <p>{{ myItinerariesEntry.itinerary.end }}</p>
-  <img class="redX" src="/img/red-x-md.png">
+  <img ng-click="myItinerariesEntry.removeItinerary(myItinerariesEntry.itinerary.id)" class="redX" src="/img/red-x-md.png">
 </div>

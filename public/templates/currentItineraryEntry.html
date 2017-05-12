@@ -2,7 +2,5 @@
   <p>{{ currentItineraryEntry.place.location }}</p>
   <p>{{ currentItineraryEntry.place.visitDate }}</p>
   <p>{{ currentItineraryEntry.place.time }}</p>
-  <!-- <p>7/13</p> -->
-  <!-- <p>2pm</p> -->
-  <img class="redX" src="/img/red-x-md.png">
+  <img ng-click="currentItineraryEntry.removeLocation(currentItineraryEntry.place.locationId)" class="redX" src="/img/red-x-md.png">
 </div>

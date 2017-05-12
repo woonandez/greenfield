@@ -39,7 +39,6 @@ angular.module('app')
 
 
         if ( $location.path() !== '/' ) {
-          // console.log($location.path().match(/\d+/));
           if ( $location.path().match(/\d+/) ) {
             this.template = '/templates' + $location.path().slice(0, 5) + '.html';
           } else {
@@ -114,6 +113,20 @@ angular.module('app')
           appServices.submitItinerary(submissionData, (res) => {
             this.itineraries.push(res.data);
           });
+        }
+
+        // Remove itinerary from user account
+        this.removeItinerary = (itineraryId) => {
+          appServices.deleteItinerary(itineraryId, (res) => {
+            console.log('Removed!');
+          });
+        }
+
+        // Remove location from selected itinerary
+        this.removeLocation = (locationId) => {
+          appServices.deleteLocation(locationId, this.currentItineraryId, (res) => {
+            console.log('Removed Location!');
+          })
         }
       },
       templateUrl: '/templates/app.html'

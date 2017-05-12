@@ -3,7 +3,6 @@
   <nav>
     <img src="/img/piranha.png">
     <span>
-      <!-- <div ng-click="app.switch('itineraries')">Itineraries</div> -->
       <span>{{app.itineraries[app.currentItineraryId - 1].name}}</span>
     </span>
     <span>
@@ -16,6 +15,6 @@
     </span>
   </nav>
 
-  <div ng-include src="app.template"></div>
+  <div ng-if="app.authenticated" ng-include src="app.template"></div>
 
 </div>
