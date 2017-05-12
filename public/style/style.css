@@ -113,6 +113,10 @@ ng-map {
   box-shadow: 0px 6px 6px #4b6693;
 }
 
+nav span:first-child {
+  margin: 15px;
+}
+
 nav {
   /*height: 100%;*/
   font-weight: 900;
@@ -129,13 +133,6 @@ nav {
 nav div {
   /*margin: 0;*/
   padding: 15px;
-}
-
-nav span:first-child {
-  /*padding: 15px;*/
-  margin: 15px;
-/*  margin-left: 20px;
-  margin-right: 20px;*/
 }
 
 nav span {
@@ -167,6 +164,7 @@ nav div:hover {
     justify-content: space-between;
   }
 }
+
 @media all and (max-width:800px) {
   nav img {
     display: none;
