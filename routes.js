@@ -87,11 +87,8 @@ app.post('/submit_location', (req, res) => {
         longitude: results.geometry.location.lng
       };
 
-      db.addLocation(...args, function(result) {
-        responseObj.locationId = result.dataValues.id;
-        res.end( JSON.stringify(responseObj) );
-      });
-      // res.end();
+      db.addLocation(...args, function() {});
+      res.end( JSON.stringify(responseObj) );
     }
   });
 });
