@@ -5,12 +5,13 @@ angular.module('app')
         locations: '<',
         addMarker: '<',
         mapCenter: '<',
-        formatDate: '<'
+        formatDate: '<',
+        formatDateTime: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryList',
       bindToController: true,
-      controller: function($scope) {},
+      controller: function() {},
       templateUrl: '../templates/currentItineraryList.html'
     }
   });

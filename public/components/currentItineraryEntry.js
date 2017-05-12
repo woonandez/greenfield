@@ -3,7 +3,8 @@ angular.module('app')
     return {
       scope: {
         place: '=',
-        formatDate: '<'
+        formatDate: '<',
+        formateDateTime: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',

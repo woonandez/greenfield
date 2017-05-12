@@ -121,6 +121,10 @@ angular.module('app')
           var format = date.split('').splice(0, 10).join('');
           return format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
         }
+
+        this.formatDateTime = (timeDate) => {
+          console.log(timeDate)
+        }
       },
       templateUrl: '/templates/app.html'
     }
