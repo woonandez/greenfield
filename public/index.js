@@ -21,16 +21,19 @@ angular.module('app')
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
+        this.currentItinerary = {name: 'My Itineraries'};
 
         this.switch = (viewport, id) => {
           if (id) {
             this.currentItineraryId = id;
+            this.currentItinerary = this.itineraries.find((itinerary) => { return itinerary.id === id })
             this.markers = [];
             this.start = [];
             this.end = [];
             this.getMarkerLocations();
             $location.path(viewport + '/' + id);
           } else {
+            this.currentItinerary = {name: 'My Itineraries'};
             $location.path(viewport);
           }
 
