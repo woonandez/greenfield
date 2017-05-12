@@ -21,7 +21,6 @@ angular.module('app')
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
-        this.currentItinerary = {name: 'My Itineraries'};
 
         this.switch = (viewport, id) => {
           if (id) {
@@ -42,12 +41,17 @@ angular.module('app')
 
 
         if ( $location.path() !== '/' ) {
-          if ( $location.path().match(/\d+/) ) {
-            this.template = '/templates' + $location.path().slice(0, 5) + '.html';
-          } else {
-            console.log('In else');
-            this.template = '/templates' + $location.path() + '.html';
-          }
+          authService.checkAuthorization(this.currentItineraryId, (isAuthorized) => {
+            if (isAuthorized === 'true') {
+              if ( $location.path().match(/\d+/) ) {
+                this.template = '/templates' + $location.path().slice(0, 5) + '.html';
+              } else {
+                this.template = '/templates' + $location.path() + '.html';
+              }
+            } else {
+              this.switch('itineraries');
+            }
+          });
         } else {
           this.switch('itineraries');
         }
@@ -81,6 +85,12 @@ angular.module('app')
             if (this.markers.length > 1) {
               this.start = this.markers[0].location;
               this.end = this.markers[this.markers.length - 1].location;
+            }
+
+            if ( this.currentItineraryId !== 0 ) {
+              this.currentItinerary = this.itineraries.find((itinerary) => { return itinerary.id === this.currentItineraryId });
+            } else {
+              this.currentItinerary = {name: 'My Itineraries'};
             }
           });
         }
