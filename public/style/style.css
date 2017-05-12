@@ -6,6 +6,10 @@ body {
   /*background-color: black;*/
 }
 
+.itineraryEntry:hover {
+  background-color: #839b63;
+}
+
 .searchContainer * {
   border-style: hidden;
   border-radius: 8px;

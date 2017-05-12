@@ -17,18 +17,6 @@ app.use(bodyParser());
 app.use(express.static(__dirname + '/public'));
 
 
-
-
-app.get('/', (req, res) => {
-  res.redirect('/itineraries');
-});
-
-
-app.get('/trip', (req, res) => {
-  res.redirect('/itineraries');
-});
-
-
 app.get('/trip/:id', (req, res) => {
   if ( /^\d+$/.test(req.params.id) ) {
     res.sendFile(public + 'index.html');
@@ -52,6 +40,8 @@ app.post('/submit_location', (req, res) => {
   //   date: "July 4th",
   //   time: "3pm"
   // };
+
+  console.log(req.body);
 
   var propertiesObj = {
     address: req.body.text,
@@ -181,7 +171,24 @@ app.post('/location_by_coords', (req, res) => {
 
 
 
+app.get('/authorize_itinerary', (req, res) => {
+  // req.query === {
+  //   itineraryId: 0
+  //   user_id: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQ2NTc5NjcsImlhdCI6MTQ5NDYyMTk2N30.5RV-p6uoysS-iGT5K4bsDqLoxYP-Xd2IkgHxnQ4_WFw"
+  // }
 
+  var decoded = jwt.decode( req.query.user_id, app.get('jwtTokenSecret'));
+
+  db.authorizeItinerary(req.query.itineraryId, decoded.sub, function(result) {
+    console.log('result', result);
+    if (result.length) {
+      res.end('true');
+    } else {
+      res.end('false');
+    }
+  });
+
+});
 
 
 
