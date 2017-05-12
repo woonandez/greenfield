@@ -86,20 +86,30 @@ var removeEvents = function(locationsId) {
     }
   })
 }
-var removeLocations = function(itineraryId) {
+var removeLocations = function(locationId, callback) {
+  model.locations.destroy({
+    where: {
+      id: locationId
+    }
+  }).then(function() {
+    callback();
+  });
+}
+
+var removeItinerary = function(itineraryId, callback) {
   model.locations.destroy({
     where: {
       id_itineraries: itineraryId
     }
-  })
-}
-
-var removeItinerary = function(itineraryId) {
-  model.itineraries.destroy({
-    where: {
-      id: itineraryId
-    }
-  })
+  }).then(function() {
+    model.itineraries.destroy({
+      where: {
+        id: itineraryId
+      }
+    })
+  }).then(function() {
+    callback();
+  });
 }
 
 module.exports.addItinerary = addItinerary;
@@ -117,4 +127,6 @@ module.exports.removeItinerary = removeItinerary;
 // addItinerary(x.name, x.start, x.end, x.userID, () => console.log('success'));
 
 // addLocation(1, "some location", "june 123rd", "4pm", 123.22, -123.222222222222, () => console.log('success'));
+
+
 
