@@ -20,8 +20,10 @@ angular.module('app')
         this.itineraries = [];
         this.markers = [];
         this.mapType = 'ROADMAP';
-        this.mapCenter = 'San Francisco';
 
+        if ( !this.mapCenter ) {
+          this.mapCenter = 'San Francisco';
+        }
 
         this.switch = (viewport, id) => {
           if (id) {
@@ -72,18 +74,21 @@ angular.module('app')
 
         NgMap.getMap().then((map) => {
           this.map = map;
-          map.getCenter();
-          this.getMarkerLocations();
+          this.getMarkerLocations(map);
         });
 
         this.searchLocation = (newLoc) => {
           this.mapCenter = newLoc;
         }
 
-        this.getMarkerLocations = () => {
+        this.getMarkerLocations = (map) => {
           appServices.getMarkers(this.currentItineraryId, ({data}) => {
             this.markers = [];
             data.forEach(d => this.markers.push(d));
+            if (this.markers.length) {
+              this.mapCenter = this.markers[0].location;
+            }
+
             if (this.markers.length > 1) {
               this.start = this.markers[0].location;
               this.end = this.markers[this.markers.length - 1].location;
@@ -94,6 +99,8 @@ angular.module('app')
             } else {
               this.currentItinerary = {name: 'My Itineraries'};
             }
+
+            map.getCenter();
           });
         }
 
@@ -108,6 +115,10 @@ angular.module('app')
 
           appServices.sendCoords(reqObj, (res) => {
             this.markers.push(res.data);
+            if (this.markers.length > 1) {
+              this.start = this.markers[0].location;
+              this.end = this.markers[this.markers.length - 1].location;
+            }
           });
         }
 
