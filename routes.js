@@ -108,10 +108,8 @@ app.post('/submit_itinerary', (req, res) => {
   // }
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  // console.log("DECODED", decoded.sub);
 
   db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
-    // console.log('RESULT', result.dataValues);
     res.end( JSON.stringify(result.dataValues) );
   });
 });
