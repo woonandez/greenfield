@@ -30,7 +30,11 @@ app.get('/trip', (req, res) => {
 
 
 app.get('/trip/:id', (req, res) => {
-  res.sendFile(public + 'index.html');
+  if ( /^\d+$/.test(req.params.id) ) {
+    res.sendFile(public + 'index.html');
+  } else {
+    res.redirect('/itineraries');
+  }
 });
 
 app.get('/itineraries', (req, res) => {
@@ -80,14 +84,13 @@ app.post('/submit_location', (req, res) => {
         visitDate: req.body.date,
         time: req.body.time,
         latitude: results.geometry.location.lat,
-        longitude: results.geometry.location.lng,
-        placeID: results.place_id
+        longitude: results.geometry.location.lng
       };
 
-      db.addLocation(...args, function() {});
-
-      res.end( JSON.stringify(responseObj) );
-
+      db.addLocation(...args, function(result) {
+        responseObj.locationId = result.dataValues.id;
+        res.end( JSON.stringify(responseObj) );
+      });
     }
   });
 });
