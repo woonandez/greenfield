@@ -79,7 +79,6 @@ body {
 }
 
 .entry {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -96,6 +95,26 @@ body {
   width: auto;
 }
 
+.entryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100vw - 100px);
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.entry * {
+  width: 100%;
+}
+
+.entry img {
+  width: auto;
+}
+
+.entry:hover {
+  background: #ffffb2
+}
 #currentItineraryEntryTitles p:last-child {
   width: auto;
 }
