@@ -79,6 +79,19 @@ var getLocationsEvents = function(locationId, callback) {
   });
 }
 
+
+var authorizeItinerary = function(itineraryId, userId, callback) {
+  model.itineraries.findAll({
+    where: {
+      userId: userId,
+      id: itineraryId
+    }
+  }).then(function(result) {
+    callback(result);
+  });
+}
+
+
 var removeEvents = function(locationsId) {
   model.events.destroy({
     where: {
@@ -121,3 +134,4 @@ module.exports.getLocationsEvents = getLocationsEvents;
 module.exports.removeEvents = removeEvents;
 module.exports.removeLocations = removeLocations;
 module.exports.removeItinerary = removeItinerary;
+module.exports.authorizeItinerary = authorizeItinerary;
