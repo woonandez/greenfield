@@ -117,16 +117,21 @@ angular.module('app')
 
         // Remove itinerary from user account
         this.removeItinerary = (itineraryId) => {
-          appServices.deleteItinerary(itineraryId, (res) => {
-            console.log('Removed!');
+          appServices.deleteItinerary(itineraryId, (res) => {});
+
+          var indexToRemove = this.itineraries.findIndex((itineraryObj) => {
+            return itineraryObj['id'] === itineraryId;
           });
+
+          this.itineraries.splice(indexToRemove, 1);
         }
 
         // Remove location from selected itinerary
         this.removeLocation = (locationId) => {
           appServices.deleteLocation(locationId, this.currentItineraryId, (res) => {
             console.log('Removed Location!');
-          })
+          });
+
         }
       },
       templateUrl: '/templates/app.html'
