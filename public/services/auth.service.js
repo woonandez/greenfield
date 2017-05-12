@@ -9,7 +9,7 @@ angular.module('app')
         $http({
           'method': 'POST',
           'url': '/login',
-          'headers': { 'Content-type': 'application/JSON' },
+          'headers': { 'Content-type': 'application/json' },
           'data': {
             'user_id': authResult.idToken
           }
@@ -30,6 +30,23 @@ angular.module('app')
     this.authenticateOnRefresh = () => {
       authManager.authenticate();
     };
+
+    this.checkAuthorization = (itineraryId, callback) => {
+      var id = localStorage.getItem('id_token');
+      $http({
+        'method': 'GET',
+        'url': '/authorize_itinerary',
+        'headers': { 'Content-type': 'application/json' },
+        'params': {
+          user_id: id,
+          itineraryId: itineraryId
+        }
+      }).then((res) => {
+        callback(res);
+      }).catch((err) => {
+        console.error(err);
+      });
+    }
 
     this.logout = () => {
       localStorage.removeItem('id_token');
