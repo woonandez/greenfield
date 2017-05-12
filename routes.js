@@ -91,6 +91,7 @@ app.post('/submit_location', (req, res) => {
         responseObj.locationId = result.dataValues.id;
         res.end( JSON.stringify(responseObj) );
       });
+      // res.end();
     }
   });
 });
@@ -129,7 +130,7 @@ app.post('/delete_location', (req, res) => {
 
   var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
 
-  db.removeLocation(req.body.itineraryId, function() {});
+  db.removeLocations(req.body.locationId, function() {});
   res.end();
 });
 
