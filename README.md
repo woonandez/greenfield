@@ -28,12 +28,16 @@
 
 ## Development
 
-### Installing Dependencies
+### Starting the app
 
-From within the root directory:
-
+To start the server you must start your mysql daemon
 ```sh
-npm install
+mysql.server start
+```
+
+Then all you need to do is start the server and the script will take care of the rest
+```sh
+npm start
 ```
 
 ### Roadmap
