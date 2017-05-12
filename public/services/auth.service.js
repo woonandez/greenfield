@@ -34,7 +34,7 @@ angular.module('app')
     this.logout = () => {
       localStorage.removeItem('id_token');
       authManager.unauthenticate();
-      $window.location.reload();
+      $window.location.href = '/itineraries';
       lock.show();
     };
   });

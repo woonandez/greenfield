@@ -9,8 +9,9 @@
     </div>
     <current-itinerary-entry
       ng-repeat="place in currentItineraryList.locations track by $index"
-      place="currentItineraryList.locations[$index]">
-    </current-itinerary-entry>
+      place="currentItineraryList.locations[$index]"
+      remove-location="currentItineraryList.removeLocation"
+    ></current-itinerary-entry>
 
   </div>
 
