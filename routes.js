@@ -20,20 +20,16 @@ app.use(express.static(__dirname + '/public'));
 
 
 app.get('/', (req, res) => {
-  // console.log('/m/m/mm/m//m');
   res.redirect('/itineraries');
 });
 
 
 app.get('/trip', (req, res) => {
-  // console.log('Inside trip');
-  // console.log(req, public);
   res.redirect('/itineraries');
 });
 
 
 app.get('/trip/:id', (req, res) => {
-  // console.log('Inside trip id: ', req.params.id);
   res.sendFile(public + 'index.html');
 });
 
@@ -72,8 +68,6 @@ app.post('/submit_location', (req, res) => {
     } else {
       var results = JSON.parse( body ).results[0];
 
-
-      // function(itineraryId, location, visitDate, time, longitude, latitude, callback)
       var args = [
         req.body.itineraryId,
         results.formatted_address,
@@ -82,8 +76,6 @@ app.post('/submit_location', (req, res) => {
         results.geometry.location.lat,
         results.geometry.location.lng,
       ];
-
-      // console.log(args);
 
       var responseObj = {
         location: results.formatted_address,
@@ -131,7 +123,8 @@ app.post('/submit_itinerary', (req, res) => {
 
 app.post('/delete_location', (req, res) => {
   // req.body === {
-  //   id: 87,
+  //   locationId: 87,
+  //   itineraryId: 28,
   //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
   // }
 
@@ -147,7 +140,7 @@ app.post('/delete_location', (req, res) => {
 
 app.post('/delete_itinerary', (req, res) => {
   // req.body === {
-  //   id: 87,
+  //   itineraryId: 87,
   //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
   // }
 
@@ -249,14 +242,11 @@ app.get('/itineraries_for_user', (req, res) => {
 
 
 app.post('/login', (req, res) => {
-  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log(decoded);
   res.end();
 });
 
 
 app.get('*', (req, res) => {
-  // console.log('all: *');
   res.redirect('/itineraries');
 });
 
