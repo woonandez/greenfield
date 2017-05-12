@@ -1,16 +1,22 @@
 <div class="app">
 
   <nav>
-    <span>Title</span>
     <span>
-      <div ng-click="app.switch('itineraries')">Itineraries</div>
+      <img src="/img/piranha.png">
+
 
     </span>
+
     <span>
-    <search
-    search-location="app.searchLocation"
-    place-changed="app.placeChanged">
-  </search>
+      <!-- <div ng-click="app.switch('itineraries')">Itineraries</div> -->
+      <div>Name of Itinerary</div>
+    </span>
+    <span>
+      <search
+      search-location="app.searchLocation"
+      place-changed="app.placeChanged">
+      </search>
+      <div ng-click="app.switch('itineraries')">Itineraries</div>
       <div class="btn btn-primary" ng-click="app.service.logout()">Logout</div>
     </span>
   </nav>

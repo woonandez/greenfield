@@ -69,10 +69,6 @@ app.post('/submit_location', (req, res) => {
   //   time: "3pm"
   // };
 
-
-  // console.log('');
-
-
   var propertiesObj = {
     address: req.body.text,
     key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
@@ -124,6 +120,71 @@ app.post('/submit_location', (req, res) => {
 
 
 
+app.post('/submit_itinerary', (req, res) => {
+  // req.body === {
+  //   name: 'trip name',
+  //   start: 'start date',
+  //   end: 'end date',
+  //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
+  // }
+
+  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
+  console.log("DECODED", decoded.sub);
+
+  // input(name, start, end, userId, callback)
+  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
+    console.log('RESULT', result.dataValues);
+    res.end( JSON.stringify(result.dataValues) );
+  });
+});
+
+
+
+app.post('/delete_location', (req, res) => {
+  // req.body === {
+  //   name: 'trip name',
+  //   start: 'start date',
+  //   end: 'end date',
+  //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
+  // }
+
+  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
+  console.log("DECODED", decoded.sub);
+
+  // input(name, start, end, userId, callback)
+  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
+    console.log('RESULT', result.dataValues);
+    res.end( JSON.stringify(result.dataValues) );
+  });
+});
+
+
+
+app.post('/delete_itinerary', (req, res) => {
+  // req.body === {
+  //   name: 'trip name',
+  //   start: 'start date',
+  //   end: 'end date',
+  //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
+  // }
+
+  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
+  console.log("DECODED", decoded.sub);
+
+  // input(name, start, end, userId, callback)
+  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
+    console.log('RESULT', result.dataValues);
+    res.end( JSON.stringify(result.dataValues) );
+  });
+});
+
+
+
+
+
+
+
+
 app.post('/location_by_coords', (req, res) => {
 
   // latlng
@@ -152,33 +213,7 @@ app.post('/location_by_coords', (req, res) => {
 });
 
 
-// /my_itinerary
-// /current_itinerary
 
-
-
-
-
-
-app.post('/submit_itinerary', (req, res) => {
-  // req.body === {
-  //   name: 'trip name',
-  //   start: 'start date',
-  //   end: 'end date',
-  //   user_id: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3hvc2suYXV0aDAuY29tLyIsInN1YiI6Imdvb2dsZS1vYXV0aDJ8MTA4MzU4MTMyNzk4ODgxNzc2ODg4IiwiYXVkIjoieDdJdGk3MUpKVjZhcHBZN3BwT0w2WGFqaTFoSDRGbUIiLCJleHAiOjE0OTQzODM3OTMsImlhdCI6MTQ5NDM0Nzc5M30.piHQCL1aHMlzgTZGzdkzm1s3lOvmlisn036MZkOp0Xc'
-  // }
-
-  var decoded = jwt.decode( req.body.user_id, app.get('jwtTokenSecret'));
-  console.log("DECODED", decoded.sub);
-
-  // console.log(req.body.userID)
-
-  // input(name, start, end, userId, callback)
-  db.addItinerary(req.body.name, req.body.start, req.body.end, decoded.sub, function(result) {
-    console.log('RESULT', result.dataValues);
-    res.end( JSON.stringify(result.dataValues) );
-  });
-});
 
 
 
