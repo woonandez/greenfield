@@ -42,7 +42,7 @@ angular.module('app')
           itineraryId: itineraryId
         }
       }).then((res) => {
-        callback(res);
+        callback(res.data);
       }).catch((err) => {
         console.error(err);
       });

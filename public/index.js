@@ -42,7 +42,7 @@ angular.module('app')
 
         if ( $location.path() !== '/' ) {
           authService.checkAuthorization(this.currentItineraryId, (isAuthorized) => {
-            if (isAuthorized) {
+            if (isAuthorized === 'true') {
               if ( $location.path().match(/\d+/) ) {
                 this.template = '/templates' + $location.path().slice(0, 5) + '.html';
               } else {
