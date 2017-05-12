@@ -26,6 +26,8 @@ angular.module('app')
           if (id) {
             this.currentItineraryId = id;
             this.markers = [];
+            this.start = [];
+            this.end = [];
             this.getMarkerLocations();
             $location.path(viewport + '/' + id);
           } else {
@@ -79,7 +81,6 @@ angular.module('app')
               this.end = this.markers[this.markers.length - 1].location;
             }
           });
-
         }
 
         this.addMarker = (place, date, time, desc) => {
