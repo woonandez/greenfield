@@ -117,7 +117,7 @@ angular.module('app')
         }
 
         this.formatDate = (date) => {
-          console.log(data);
+          console.log(date);
         }
 
       },
