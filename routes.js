@@ -41,8 +41,6 @@ app.get('/itineraries', (req, res) => {
 
 
 
-
-// form should send request with text from an input element named 'text'
 app.post('/submit_location', (req, res) => {
   // req.body === {
   //   itineraryId: 0,
