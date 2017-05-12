@@ -75,7 +75,9 @@ app.post('/submit_location', (req, res) => {
 
   var propertiesObj = {
     address: req.body.text,
-    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
+      key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
+
+
   };
 
   var params = {
