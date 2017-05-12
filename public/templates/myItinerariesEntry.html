@@ -1,5 +1,8 @@
 <div class="entry">
-  <p>{{ myItinerariesEntry.itinerary.name }}</p>
+  <p
+    ng-click="myItinerariesEntry.appClick('trip', myItinerariesEntry.itinerary.id)">
+    {{ myItinerariesEntry.itinerary.name }}
+  </p>
   <p>{{ myItinerariesEntry.itinerary.start }}</p>
   <p>{{ myItinerariesEntry.itinerary.end }}</p>
   <img class="redX" src="/img/red-x-md.png">

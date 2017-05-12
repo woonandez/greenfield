@@ -1,17 +1,17 @@
 <div class="app">
 
   <nav>
-    <span>Title</span>
+    <img src="/img/piranha.png">
     <span>
-      <div ng-click="app.switch('trip')">Current Itinerary</div>
-      <div ng-click="app.switch('itineraries')">Itineraries</div>
-
+      <!-- <div ng-click="app.switch('itineraries')">Itineraries</div> -->
+      <span>{{app.itineraries[app.currentItineraryId - 1].name}}</span>
     </span>
     <span>
-    <search
-    search-location="app.searchLocation"
-    place-changed="app.placeChanged">
-  </search>
+      <search
+      search-location="app.searchLocation"
+      place-changed="app.placeChanged">
+      </search>
+      <div ng-click="app.switch('itineraries')">Itineraries</div>
       <div class="btn btn-primary" ng-click="app.service.logout()">Logout</div>
     </span>
   </nav>

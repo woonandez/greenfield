@@ -1,7 +1,6 @@
 angular.module('app')
   .directive('app', function() {
 
-
     return {
       scope: {
         authenticated: '<',
@@ -17,26 +16,40 @@ angular.module('app')
           authService.login();
         }
 
+        this.currentItineraryId = +$location.path().slice(6);
         this.itineraries = [];
         this.markers = [];
         this.mapCenter = 'San Francisco';
         this.mapType = 'TERRAIN';
 
-        // Placeholder data
-        this.userItineraries = [{'id': 1, 'name': 'Europe Vacation', date: 'September 2017'},
-                                {'id': 2, 'name': 'California Vacation', date: 'November 2017'},
-                                {'id': 3, 'name': 'New Years!', 'date': 'January 2018'}];
+        this.switch = (viewport, id) => {
+          if (id) {
+            this.currentItineraryId = id;
+            this.markers = [];
+            this.start = [];
+            this.end = [];
+            this.getMarkerLocations();
+            $location.path(viewport + '/' + id);
+          } else {
+            $location.path(viewport);
+          }
 
-        this.switch = (viewport) => {
           this.template = '/templates/' + viewport + '.html';
-          $location.path(viewport);
         }
 
-        if ( $location.url() !== '/' ) {
-          this.template = '/templates' + $location.path() + '.html';
+
+        if ( $location.path() !== '/' ) {
+          // console.log($location.path().match(/\d+/));
+          if ( $location.path().match(/\d+/) ) {
+            this.template = '/templates' + $location.path().slice(0, 5) + '.html';
+          } else {
+            console.log('In else');
+            this.template = '/templates' + $location.path() + '.html';
+          }
         } else {
-          this.switch('trip');
+          this.switch('itineraries');
         }
+
 
         this.getCurrentLocation = (e) => {
           var lat = e.latLng.lat();
@@ -61,22 +74,26 @@ angular.module('app')
         }
 
         this.getMarkerLocations = () => {
-          appServices.getMarkers('param', ({data}) => {
+          appServices.getMarkers(this.currentItineraryId, ({data}) => {
             data.forEach(d => this.markers.push(d));
+            if (this.markers.length > 1) {
+              this.start = this.markers[0].location;
+              this.end = this.markers[this.markers.length - 1].location;
+            }
           });
         }
 
         this.addMarker = (place, date, time, desc) => {
-          var destination = this.mapCenter === place ? place : this.mapCenter;
+          var destination = place === undefined ? this.mapCenter : place;
           var reqObj = {
+            id: this.currentItineraryId,
             text: destination,
             date: date,
-            time: time,
-            desc: desc
+            time: time
           }
 
           appServices.sendCoords(reqObj, (res) => {
-            $window.location.reload();
+            this.markers.push(res.data);
           });
         }
 
@@ -95,10 +112,10 @@ angular.module('app')
             end: end
           };
           appServices.submitItinerary(submissionData, (res) => {
-            $window.location.reload();
+            this.itineraries.push(res.data);
           });
         }
       },
-      templateUrl: './templates/app.html'
+      templateUrl: '/templates/app.html'
     }
   });

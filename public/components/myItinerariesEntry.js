@@ -2,12 +2,13 @@ angular.module('app')
   .directive('myItinerariesEntry', function() {
     return {
       scope: {
-        itinerary: '<'
+        itinerary: '<',
+        appClick: '<'
       },
       restrict: 'E',
       controllerAs: 'myItinerariesEntry',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/myItinerariesEntry.html'
+      templateUrl: '/templates/myItinerariesEntry.html'
     }
   });

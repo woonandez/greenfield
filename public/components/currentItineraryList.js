@@ -10,6 +10,6 @@ angular.module('app')
       controllerAs: 'currentItineraryList',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/currentItineraryList.html'
+      templateUrl: '/templates/currentItineraryList.html'
     }
   });
