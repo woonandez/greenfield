@@ -78,7 +78,7 @@ body {
   border-radius: 10pt;
 }
 
-.entry {
+.entryRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -87,11 +87,11 @@ body {
   padding-right: 20px;
 }
 
-.entry * {
+.entryRow * {
   width: 100%;
 }
 
-.entry img {
+.entryRow img {
   width: auto;
 }
 
@@ -104,17 +104,18 @@ body {
   padding-right: 20px;
 }
 
-.entry * {
+.entryItem * {
   width: 100%;
 }
 
-.entry img {
+.entryItem img {
   width: auto;
 }
 
-.entry:hover {
+.entryItem:hover {
   background: #ffffb2
 }
+
 #currentItineraryEntryTitles p:last-child {
   width: auto;
 }
