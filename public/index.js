@@ -19,8 +19,9 @@ angular.module('app')
         this.currentItineraryId = +$location.path().slice(6);
         this.itineraries = [];
         this.markers = [];
+        this.mapType = 'ROADMAP';
         this.mapCenter = 'San Francisco';
-        this.mapType = 'TERRAIN';
+
 
         this.switch = (viewport, id) => {
           if (id) {
@@ -81,6 +82,7 @@ angular.module('app')
 
         this.getMarkerLocations = () => {
           appServices.getMarkers(this.currentItineraryId, ({data}) => {
+            this.markers = [];
             data.forEach(d => this.markers.push(d));
             if (this.markers.length > 1) {
               this.start = this.markers[0].location;
