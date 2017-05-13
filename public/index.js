@@ -141,6 +141,17 @@ angular.module('app')
           });
         }
 
+
+        this.formatDate = (date) => {
+          var length = date.length;
+          var format = date.split('').splice(0, 10).join('');
+          return format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
+        }
+
+        this.formatDateTime = (timeDate) => {
+          console.log(timeDate)
+        }
+
         // Remove itinerary from user account
         this.removeItinerary = (itineraryId) => {
           appServices.deleteItinerary(itineraryId, (res) => {});
@@ -161,6 +172,7 @@ angular.module('app')
           });
 
           this.markers.splice(locationToRemove, 1);
+
         }
       },
       templateUrl: '/templates/app.html'

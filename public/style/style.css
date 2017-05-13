@@ -82,22 +82,46 @@ body {
   border-radius: 10pt;
 }
 
-.entry {
-
+.entryRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: calc(100vw - 100px);
   padding-left: 20px;
   padding-right: 20px;
+  border-bottom: 2px solid #ffffb2;
+  text-align: center;
 }
 
-.entry * {
+.entryRow * {
   width: 100%;
 }
 
-.entry img {
+.entryRow img {
   width: auto;
+}
+
+.entryItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: calc(100vw - 100px);
+  padding-left: 20px;
+  padding-right: 20px;
+  border-bottom: 2px solid #ffffb2;
+  text-align: center;
+}
+
+.entryItem * {
+  width: 100%;
+}
+
+.entryItem img {
+  width: auto;
+}
+
+.entryItem:hover {
+  background: #ffffb2
 }
 
 #currentItineraryEntryTitles p:last-child {

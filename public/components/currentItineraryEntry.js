@@ -3,6 +3,8 @@ angular.module('app')
     return {
       scope: {
         place: '=',
+        formatDate: '<',
+        formateDateTime: '<',
         removeLocation: '<'
       },
       restrict: 'E',
