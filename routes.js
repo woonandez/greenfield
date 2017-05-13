@@ -58,27 +58,31 @@ app.post('/submit_location', (req, res) => {
       console.log(err);
       res.end(err);
     } else {
+
       var results = JSON.parse( body ).results[0];
 
-      var args = [
-        req.body.itineraryId,
-        results.formatted_address,
-        req.body.date,
-        req.body.time,
-        results.geometry.location.lat,
-        results.geometry.location.lng,
-      ];
+      if (results) {
+        var args = [
+          req.body.itineraryId,
+          results.formatted_address,
+          req.body.date,
+          req.body.time,
+          results.geometry.location.lat,
+          results.geometry.location.lng,
+        ];
 
-      var responseObj = {
-        location: results.formatted_address,
-        visitDate: req.body.date,
-        time: req.body.time,
-        latitude: results.geometry.location.lat,
-        longitude: results.geometry.location.lng
-      };
+        var responseObj = {
+          location: results.formatted_address,
+          visitDate: req.body.date,
+          time: req.body.time,
+          latitude: results.geometry.location.lat,
+          longitude: results.geometry.location.lng
+        };
 
-      db.addLocation(...args, function() {});
-      res.end( JSON.stringify(responseObj) );
+        db.addLocation(...args, function() {});
+        res.end( JSON.stringify(responseObj) );
+      }
+      res.end('broken');
     }
   });
 });

@@ -100,7 +100,7 @@ angular.module('app')
               this.currentItinerary = {name: 'My Itineraries'};
             }
 
-            map.getCenter();
+            // map.getCenter();
           });
         }
 
