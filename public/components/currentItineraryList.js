@@ -5,6 +5,8 @@ angular.module('app')
         locations: '<',
         addMarker: '<',
         mapCenter: '<',
+        formatDate: '<',
+        formatDateTime: '<',
         removeLocation: '<'
       },
       restrict: 'E',

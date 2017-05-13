@@ -1,7 +1,7 @@
 <div class="currentItineraryList">
 
   <div class="entryListContainer">
-    <div id="currentItineraryEntryTitles" class="entry">
+    <div id="currentItineraryEntryTitles" class="entryRow">
       <p>Location</p>
       <p>Date</p>
       <p>Time</p>
@@ -10,8 +10,10 @@
     <current-itinerary-entry
       ng-repeat="place in currentItineraryList.locations track by $index"
       place="currentItineraryList.locations[$index]"
-      remove-location="currentItineraryList.removeLocation"
-    ></current-itinerary-entry>
+      format-date="currentItineraryList.formatDate"
+      formate-date-time="currentItineraryList.formatDateTime"
+      remove-location="currentItineraryList.removeLocation">
+    </current-itinerary-entry>
 
   </div>
 
