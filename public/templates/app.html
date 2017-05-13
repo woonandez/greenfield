@@ -3,19 +3,19 @@
   <nav>
     <img src="/img/piranha.png">
     <span>
-      <!-- <div ng-click="app.switch('itineraries')">Itineraries</div> -->
-      <span>{{app.itineraries[app.currentItineraryId - 1].name}}</span>
+      <span>{{app.currentItinerary.name}}</span>
     </span>
     <span>
       <search
-      search-location="app.searchLocation"
-      place-changed="app.placeChanged">
+        ng-if="app.currentItinerary.name !== 'My Itineraries'"
+        search-location="app.searchLocation"
+        place-changed="app.placeChanged">
       </search>
       <div ng-click="app.switch('itineraries')">Itineraries</div>
       <div class="btn btn-primary" ng-click="app.service.logout()">Logout</div>
     </span>
   </nav>
 
-  <div ng-include src="app.template"></div>
+  <div ng-if="app.authenticated" ng-include src="app.template"></div>
 
 </div>

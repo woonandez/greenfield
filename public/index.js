@@ -19,18 +19,23 @@ angular.module('app')
         this.currentItineraryId = +$location.path().slice(6);
         this.itineraries = [];
         this.markers = [];
-        this.mapCenter = 'San Francisco';
-        this.mapType = 'TERRAIN';
+        this.mapType = 'ROADMAP';
+
+        if ( !this.mapCenter ) {
+          this.mapCenter = 'San Francisco';
+        }
 
         this.switch = (viewport, id) => {
           if (id) {
             this.currentItineraryId = id;
+            this.currentItinerary = this.itineraries.find((itinerary) => { return itinerary.id === id })
             this.markers = [];
             this.start = [];
             this.end = [];
             this.getMarkerLocations();
             $location.path(viewport + '/' + id);
           } else {
+            this.currentItinerary = {name: 'My Itineraries'};
             $location.path(viewport);
           }
 
@@ -39,13 +44,17 @@ angular.module('app')
 
 
         if ( $location.path() !== '/' ) {
-          // console.log($location.path().match(/\d+/));
-          if ( $location.path().match(/\d+/) ) {
-            this.template = '/templates' + $location.path().slice(0, 5) + '.html';
-          } else {
-            console.log('In else');
-            this.template = '/templates' + $location.path() + '.html';
-          }
+          authService.checkAuthorization(this.currentItineraryId, (isAuthorized) => {
+            if (isAuthorized === 'true') {
+              if ( $location.path().match(/\d+/) ) {
+                this.template = '/templates' + $location.path().slice(0, 5) + '.html';
+              } else {
+                this.template = '/templates' + $location.path() + '.html';
+              }
+            } else {
+              this.switch('itineraries');
+            }
+          });
         } else {
           this.switch('itineraries');
         }
@@ -65,21 +74,33 @@ angular.module('app')
 
         NgMap.getMap().then((map) => {
           this.map = map;
-          map.getCenter();
-          this.getMarkerLocations();
+          this.getMarkerLocations(map);
         });
 
         this.searchLocation = (newLoc) => {
           this.mapCenter = newLoc;
         }
 
-        this.getMarkerLocations = () => {
+        this.getMarkerLocations = (map) => {
           appServices.getMarkers(this.currentItineraryId, ({data}) => {
+            this.markers = [];
             data.forEach(d => this.markers.push(d));
+            if (this.markers.length) {
+              this.mapCenter = this.markers[0].location;
+            }
+
             if (this.markers.length > 1) {
               this.start = this.markers[0].location;
               this.end = this.markers[this.markers.length - 1].location;
             }
+
+            if ( this.currentItineraryId !== 0 ) {
+              this.currentItinerary = this.itineraries.find((itinerary) => { return itinerary.id === this.currentItineraryId });
+            } else {
+              this.currentItinerary = {name: 'My Itineraries'};
+            }
+
+            map.getCenter();
           });
         }
 
@@ -94,6 +115,10 @@ angular.module('app')
 
           appServices.sendCoords(reqObj, (res) => {
             this.markers.push(res.data);
+            if (this.markers.length > 1) {
+              this.start = this.markers[0].location;
+              this.end = this.markers[this.markers.length - 1].location;
+            }
           });
         }
 
@@ -116,6 +141,7 @@ angular.module('app')
           });
         }
 
+
         this.formatDate = (date) => {
           var length = date.length;
           var format = date.split('').splice(0, 10).join('');
@@ -124,6 +150,29 @@ angular.module('app')
 
         this.formatDateTime = (timeDate) => {
           console.log(timeDate)
+        }
+
+        // Remove itinerary from user account
+        this.removeItinerary = (itineraryId) => {
+          appServices.deleteItinerary(itineraryId, (res) => {});
+
+          var itineraryToRemove = this.itineraries.findIndex((itinerary) => {
+            return itinerary['id'] === itineraryId;
+          });
+
+          this.itineraries.splice(itineraryToRemove, 1);
+        }
+
+        // Remove location from selected itinerary
+        this.removeLocation = (locationId) => {
+          appServices.deleteLocation(locationId, this.currentItineraryId, (res) => {});
+
+          var locationToRemove = this.markers.findIndex((location) => {
+            return location['id'] === locationId;
+          });
+
+          this.markers.splice(locationToRemove, 1);
+
         }
       },
       templateUrl: '/templates/app.html'

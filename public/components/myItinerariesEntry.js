@@ -3,12 +3,13 @@ angular.module('app')
     return {
       scope: {
         itinerary: '<',
-        appClick: '<'
+        appClick: '<',
+        removeItinerary: '<'
       },
       restrict: 'E',
       controllerAs: 'myItinerariesEntry',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/myItinerariesEntry.html'
+      templateUrl: '/templates/myItinerariesEntry.html'
     }
   });

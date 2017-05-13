@@ -4,12 +4,13 @@ angular.module('app')
       scope: {
         place: '=',
         formatDate: '<',
-        formateDateTime: '<'
+        formateDateTime: '<',
+        removeLocation: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/currentItineraryEntry.html'
+      templateUrl: '/templates/currentItineraryEntry.html'
     }
   });

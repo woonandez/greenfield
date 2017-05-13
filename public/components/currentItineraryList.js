@@ -6,12 +6,13 @@ angular.module('app')
         addMarker: '<',
         mapCenter: '<',
         formatDate: '<',
-        formatDateTime: '<'
+        formatDateTime: '<',
+        removeLocation: '<'
       },
       restrict: 'E',
       controllerAs: 'currentItineraryList',
       bindToController: true,
       controller: function() {},
-      templateUrl: '../templates/currentItineraryList.html'
+      templateUrl: '/templates/currentItineraryList.html'
     }
   });

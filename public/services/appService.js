@@ -73,4 +73,35 @@ angular.module('app')
         callback(res);
       });
     }
+
+    this.deleteItinerary = function(itineraryId, callback) {
+      var id = localStorage.getItem('id_token');
+      $http({
+        method: 'POST',
+        url: '/delete_itinerary',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          user_id: id,
+          itineraryId: itineraryId
+        }
+      }).then((res) => {
+        callback(res);
+      });
+    }
+
+    this.deleteLocation = function(locationId, itineraryId, callback) {
+      var id = localStorage.getItem('id_token');
+      $http({
+        method: 'POST',
+        url: '/delete_location',
+        headers: { 'Content-Type': 'application/json' },
+        data: {
+          user_id: id,
+          itineraryId: itineraryId,
+          locationId: locationId
+        }
+      }).then((res) => {
+        callback(res);
+      });
+    }
   });
