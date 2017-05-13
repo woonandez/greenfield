@@ -4,12 +4,16 @@ angular.module('app')
       scope: {
         itinerary: '<',
         appClick: '<',
+        formatDate: '<',
+        formatDateTime: '<',
         removeItinerary: '<'
       },
       restrict: 'E',
       controllerAs: 'myItinerariesEntry',
       bindToController: true,
-      controller: function() {},
+      controller: function() {
+        console.log(this);
+      },
       templateUrl: '/templates/myItinerariesEntry.html'
     }
   });
