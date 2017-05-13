@@ -1,8 +1,6 @@
 <div class="entry itineraryEntry" ng-click="myItinerariesEntry.appClick('trip', myItinerariesEntry.itinerary.id)">
   <p>{{ myItinerariesEntry.itinerary.name }}</p>
-  <!-- <p>{{ myItinerariesEntry.formatDateTime(myItinerariesEntry.itinerary.start) }}</p> -->
-  <!-- <p>{{ myItinerariesEntry.formatDateTime(myItinerariesEntry.itinerary.end) }}</p> -->
-  <p>{{ myItinerariesEntry.itinerary.start }}</p>
-  <p>{{ myItinerariesEntry.itinerary.end }}</p>
+  <p>{{ myItinerariesEntry.formatDate(myItinerariesEntry.itinerary.start) }}</p>
+  <p>{{ myItinerariesEntry.formatDate(myItinerariesEntry.itinerary.end) }}</p>
   <img ng-click="myItinerariesEntry.removeItinerary(myItinerariesEntry.itinerary.id)" class="redX" src="/img/red-x-md.png">
 </div>
