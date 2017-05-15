@@ -1,6 +1,6 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('piranha', 'root', '', {
-  host: 'localhost',
+var sequelize = new Sequelize('heroku_6a89e82b691972a', 'b0509710d39880', '29b2ff6e', {
+  host: 'us-cdbr-iron-east-03.cleardb.net',
   port: 3306,
   dialect: 'mysql'
   });

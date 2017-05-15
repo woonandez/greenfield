@@ -81,6 +81,7 @@ body {
   margin: 30px;
   border-radius: 10pt;
 }
+
 .entry {
   display: flex;
   justify-content: space-between;

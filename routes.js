@@ -41,11 +41,12 @@ app.post('/submit_location', (req, res) => {
   //   time: "3pm"
   // };
 
+
   console.log(req.body);
 
   var propertiesObj = {
     address: req.body.text,
-    key: 'AIzaSyBZ8EbK7eX0twoYIy-wfONHc29fZJU3HV8'
+    key: process.env.GEOCODING_KEY
   };
 
   var params = {
