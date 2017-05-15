@@ -144,12 +144,25 @@ angular.module('app')
 
         this.formatDate = (date) => {
           var length = date.length;
-          var format = date.split('').splice(0, 10).join('');
-          return format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
+          var format = date
+            .split('')
+            .splice(0, 10)
+            .join('')
+            .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1')
+            .split('-');
+          var month = format[1];
+          var year = format[0];
+          var day = format[2];
+          return `${month}/${day}/${year}`
         }
 
         this.formatDateTime = (timeDate) => {
-          console.log(timeDate);
+          var copy = timeDate.slice(11, timeDate.length - 1).split('.')[0];
+          var split = copy.split(':');
+          var westernTime = parseInt(split[0]);
+          var timeCode = westernTime >= 12 ? 'PM' : 'AM';
+          var hour = westernTime >= 12 ? westernTime - 12 : westernTime;
+          return `${hour}:${split[1]} ${timeCode}`;
         }
 
         // Remove itinerary from user account
