@@ -3,6 +3,7 @@ var sequelize = new Sequelize('heroku_6a89e82b691972a', 'b0509710d39880', '29b2f
   host: 'us-cdbr-iron-east-03.cleardb.net',
   port: 3306,
   dialect: 'mysql'
+  // pool: { idle: 120000, max: 5, min: 0}
   });
 
 var itineraries = sequelize.define('itineraries', {
