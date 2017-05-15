@@ -16,9 +16,9 @@
   </div>
 
   <form class="listForm" ng-submit="currentItineraryList.addMarker(place, date, time, desc)">
-    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}"></input>
-    <input ng-model="date" type="date"></input>
-    <input ng-model="time" type="time"></input>
+    <input ng-model="place" type="text" placeholder="{{ currentItineraryList.mapCenter }}" required></input>
+    <input ng-model="date" type="date" required></input>
+    <input ng-model="time" type="time" required></input>
     <input id="formSubmit" type="submit" value="Submit"></input>
   </form>
 

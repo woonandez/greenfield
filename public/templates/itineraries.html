@@ -18,9 +18,9 @@
   </div>
 
   <form class="listForm" ng-submit="app.addItinerary(name, start, end)">
-    <input ng-model="name" type="text" placeholder="Itinerary Name"></input>
-    <input ng-model="start" type="date"></input>
-    <input ng-model="end" type="date"></input>
+    <input ng-model="name" type="text" placeholder="Itinerary Name" required></input>
+    <input ng-model="start" type="date" required></input>
+    <input ng-model="end" type="date" required></input>
     <input id="formSubmit" type="submit" value="Submit"></input>
   </form>
 </div>
