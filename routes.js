@@ -41,7 +41,6 @@ app.post('/submit_location', (req, res) => {
   //   time: "3pm"
   // };
 
-
   console.log(req.body);
 
   var propertiesObj = {
