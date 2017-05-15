@@ -158,7 +158,7 @@ angular.module('app')
 
         this.formatDateTime = (timeDate) => {
           var copy = timeDate.slice(11, timeDate.length - 1).split('.')[0];
-          var split = copy.split(':')
+          var split = copy.split(':');
           var westernTime = parseInt(split[0]);
           var timeCode = westernTime >= 12 ? 'PM' : 'AM';
           var hour = westernTime >= 12 ? westernTime - 12 : westernTime;
