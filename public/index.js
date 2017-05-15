@@ -144,8 +144,16 @@ angular.module('app')
 
         this.formatDate = (date) => {
           var length = date.length;
-          var format = date.split('').splice(0, 10).join('');
-          return format.replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1');
+          var format = date
+            .split('')
+            .splice(0, 10)
+            .join('')
+            .replace(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2}).(\d{7})$/, '$3/$2/$1')
+            .split('-');
+          var month = format[1];
+          var year = format[0];
+          var day = format[2];
+          return `${month}/${day}/${year}`
         }
 
         this.formatDateTime = (timeDate) => {
