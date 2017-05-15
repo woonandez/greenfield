@@ -10,9 +10,7 @@ angular.module('app')
       restrict: 'E',
       controllerAs: 'currentItineraryEntry',
       bindToController: true,
-      controller: function($scope) {
-        console.log($scope, 'scope');
-      },
+      controller: function($scope) {},
       templateUrl: '/templates/currentItineraryEntry.html'
     }
   });
